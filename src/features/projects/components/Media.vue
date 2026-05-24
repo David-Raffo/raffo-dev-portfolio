@@ -2,6 +2,7 @@
 import { computed, ref, onMounted, watchEffect } from "vue";
 import gsap from "gsap";
 import Notch from "../../../components/Notch.vue";
+import { isTouch } from "../../../composables/useAgent";
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
 const mediaRef = ref<HTMLVideoElement | HTMLImageElement | null>(null);
@@ -55,7 +56,7 @@ const magnifierVisible = ref(false);
 const magnifierStyle = ref({});
 
 const handleMouseMove = (e: MouseEvent) => {
-  if (props.type !== "image") return;
+  if (props.type !== "image" || isTouch.value) return;
   const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
   const x = e.clientX - rect.left;
   const y = e.clientY - rect.top;
@@ -73,13 +74,13 @@ const handleMouseMove = (e: MouseEvent) => {
 };
 
 const handleMouseEnter = (e: MouseEvent) => {
-  if (props.type !== "image") return;
+  if (props.type !== "image" || isTouch.value) return;
   magnifierVisible.value = true;
   handleMouseMove(e);
 };
 
 const handleMouseLeave = () => {
-  if (props.type !== "image") return;
+  if (props.type !== "image" || isTouch.value) return;
   magnifierVisible.value = false;
 };
 

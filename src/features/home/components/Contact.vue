@@ -4,6 +4,7 @@ import { transitions } from "../../../animations";
 import { t } from "../../../i18n/utils/translate";
 import { locale } from "../../../i18n/store";
 import Social from "../../../components/Social.vue";
+import AppearingText from "../../../components/AppearingText.vue";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
@@ -28,24 +29,28 @@ const mottosByLocale: Record<string, string[]> = {
 
 const contactElement = ref<HTMLElement | null>(null);
 const mottoRef = ref<HTMLElement | null>(null);
-const mottoTextRef = ref<HTMLElement | null>(null);
 let mottoTrigger: ScrollTrigger | null = null;
 let mottoInterval: ReturnType<typeof setInterval> | null = null;
+let hasEntered = false;
 
 const mottos = computed(() => mottosByLocale[locale.value ?? "es"] ?? mottosByLocale["es"]!);
 const mottoIndex = ref(0);
 const currentMotto = computed(() => mottos.value[mottoIndex.value] ?? "");
 
-const cycleMotto = () => {
-  if (!mottoTextRef.value) return;
-  gsap.to(mottoTextRef.value, {
-    opacity: 0,
-    duration: 0.8,
-    onComplete: () => {
-      mottoIndex.value = (mottoIndex.value + 1) % (mottos.value?.length ?? 1);
-      gsap.to(mottoTextRef.value, { opacity: 1, duration: 0.8 });
-    },
-  });
+const startInterval = () => {
+  if (mottoInterval) clearInterval(mottoInterval);
+  mottoInterval = setInterval(() => {
+    mottoIndex.value = (mottoIndex.value + 1) % (mottos.value?.length ?? 1);
+  }, 6000);
+};
+
+const handleVisibilityChange = () => {
+  if (document.hidden) {
+    if (mottoInterval) clearInterval(mottoInterval);
+    mottoInterval = null;
+  } else if (hasEntered) {
+    startInterval();
+  }
 };
 
 onMounted(() => {
@@ -66,18 +71,22 @@ onMounted(() => {
           ease: "back.out(1.7)",
           delay: 0.8,
           onComplete: () => {
-            mottoInterval = setInterval(cycleMotto, 6000);
+            hasEntered = true;
+            startInterval();
           },
         });
       },
     });
   }
+
+  document.addEventListener("visibilitychange", handleVisibilityChange);
 });
 
 onUnmounted(() => {
   transitions.contact.destroy();
   mottoTrigger?.kill();
   if (mottoInterval) clearInterval(mottoInterval);
+  document.removeEventListener("visibilitychange", handleVisibilityChange);
 });
 </script>
 
@@ -88,7 +97,9 @@ onUnmounted(() => {
       <Social variant="background" />
     </div>
     <div class="contact-motto" ref="mottoRef">
-      <p ref="mottoTextRef">{{ currentMotto }}</p>
+      <div class="contact-motto-bubble">
+        <AppearingText :text="currentMotto" :steps="1" :duration="2.5" @timeline:created="(tl) => tl.play()" />
+      </div>
     </div>
   </div>
 </template>
@@ -137,8 +148,17 @@ onUnmounted(() => {
       align-items: flex-start;
       grid-column: 8 / 13;
       padding-top: var(--space-lg);
+    }
 
-      p {
+    @include mixins.mq("lg") {
+      grid-column: 8 / 13;
+    }
+
+    &-bubble {
+      display: none;
+
+      @include mixins.mq("md") {
+        display: block;
         position: relative;
         background: var(--color-background-400, var(--color-beige-400));
         border: var(--stroke-sm) solid currentColor;
@@ -165,17 +185,9 @@ onUnmounted(() => {
             -26px 26px 0 2px var(--color-background-400, var(--color-beige-400)),
             -26px 26px 0 3px currentColor;
         }
-
-        &::before {
-          display: none;
-        }
       }
-    }
 
-    @include mixins.mq("lg") {
-      grid-column: 8 / 13;
-
-      p {
+      @include mixins.mq("lg") {
         font-size: var(--font-size-lg);
         max-width: 360px;
       }
