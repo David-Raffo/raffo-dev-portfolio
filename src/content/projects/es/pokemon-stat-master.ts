@@ -11,7 +11,7 @@ export default {
   videoBorder: true,
   live: "https://v0-pokemon-stat-game.vercel.app/",
   description:
-    "<p class='description-hook'>¿Crees que conoces bien a tus Pokémon? Demuéstralo.</p><p>Pokémon Stat Master es un minijuego de trivia donde pones a prueba tu conocimiento de los stats de Pokémon — ordena 6 Pokémon aleatorios por un stat específico (Ataque, Defensa, Velocidad, etc.) sin ver los valores reales.</p><p>Incluye modo competitivo con 6 rondas consecutivas y ranking online global, construido con Next.js, TypeScript, Supabase (PostgreSQL) y datos reales de la PokéAPI.</p>",
+    "<p class='description-hook'>¿Crees que conoces bien a tus Pokémon? Demuéstralo.</p><p>Pokémon Stat Master es un minijuego de trivia donde pones a prueba tu conocimiento de los stats de Pokémon. Ordena 6 Pokémon aleatorios por un stat específico (Ataque, Defensa, Velocidad, etc.) sin ver los valores reales.</p><p>Incluye modo competitivo con 6 rondas consecutivas y ranking online global, construido con Next.js, TypeScript, Supabase (PostgreSQL) y datos reales de la PokéAPI.</p>",
   components: [
     {
       type: "media",
