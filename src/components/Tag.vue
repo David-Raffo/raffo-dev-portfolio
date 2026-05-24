@@ -48,13 +48,13 @@ const classes = computed(() => ["tag", `tag-variant-${props.variant}`]);
     }
 
     &-html {
-      color: var(--color-text-400);
-      border-color: var(--color-grayscale-400);
+      background-color: #e34f26;
+      color: white;
     }
 
     &-css {
-      color: var(--color-text-400);
-      border-color: var(--color-grayscale-400);
+      background-color: #1572b6;
+      color: white;
     }
 
     &-javascript {
@@ -89,6 +89,96 @@ const classes = computed(() => ["tag", `tag-variant-${props.variant}`]);
 
     &-glsl {
       background-color: #95630e;
+      color: white;
+    }
+
+    &-docker {
+      background-color: #2496ed;
+      color: white;
+    }
+
+    &-wordpress {
+      background-color: #21759b;
+      color: white;
+    }
+
+    &-prestashop {
+      background-color: #df0067;
+      color: white;
+    }
+
+    &-shopify {
+      background-color: #96bf48;
+      color: white;
+    }
+
+    &-php {
+      background-color: #777bb4;
+      color: white;
+    }
+
+    &-seo {
+      background-color: #f59e0b;
+      color: white;
+    }
+
+    &-openrouter {
+      background-color: #6366f1;
+      color: white;
+    }
+
+    &-api {
+      background-color: #059669;
+      color: white;
+    }
+
+    &-python {
+      background-color: #3776ab;
+      color: white;
+    }
+
+    &-n8n {
+      background-color: #ea4b71;
+      color: white;
+    }
+
+    &-langgraph {
+      background-color: #1a1a1a;
+      color: white;
+    }
+
+    &-typescript {
+      background-color: #3178c6;
+      color: white;
+    }
+
+    &-pokeapi {
+      background-color: #ef5350;
+      color: white;
+    }
+
+    &-godot {
+      background-color: #478cbf;
+      color: white;
+    }
+
+    &-pixelart {
+      background-color: #FFE082;
+      color: #35016D;
+    }
+
+    &-aseprite {
+      background-color: #7d4cdb;
+      color: white;
+    }
+
+    &-gimp {
+      background-color: #57595c;
+      color: white;
+    }
+
+    &-gdscript {
+      background-color: #478cbf;
       color: white;
     }
   }

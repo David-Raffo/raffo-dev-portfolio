@@ -9,10 +9,11 @@ const mediaContentRef = ref<HTMLDivElement | null>(null);
 const isMounted = ref(false);
 
 export interface Props {
-  type: "image" | "video";
+  type: "image" | "video" | "youtube";
   src: string;
   alt?: string;
   caption?: string;
+  captionAlign?: "left" | "right";
   index: number;
 }
 
@@ -47,6 +48,41 @@ watchEffect(async (onInvalidate) => {
   });
 });
 
+const MAGNIFIER_SIZE = 240;
+const ZOOM = 1.6;
+
+const magnifierVisible = ref(false);
+const magnifierStyle = ref({});
+
+const handleMouseMove = (e: MouseEvent) => {
+  if (props.type !== "image") return;
+  const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  const bgX = -(x * ZOOM - MAGNIFIER_SIZE / 2);
+  const bgY = -(y * ZOOM - MAGNIFIER_SIZE / 2);
+
+  magnifierStyle.value = {
+    left: `${x - MAGNIFIER_SIZE / 2}px`,
+    top: `${y - MAGNIFIER_SIZE / 2}px`,
+    backgroundImage: `url(${props.src})`,
+    backgroundSize: `${rect.width * ZOOM}px ${rect.height * ZOOM}px`,
+    backgroundPosition: `${bgX}px ${bgY}px`,
+  };
+};
+
+const handleMouseEnter = (e: MouseEvent) => {
+  if (props.type !== "image") return;
+  magnifierVisible.value = true;
+  handleMouseMove(e);
+};
+
+const handleMouseLeave = () => {
+  if (props.type !== "image") return;
+  magnifierVisible.value = false;
+};
+
 onMounted(async () => {
   isMounted.value = true;
 });
@@ -54,7 +90,7 @@ onMounted(async () => {
 
 <template>
   <div :class="wrapperClasses" ref="wrapperRef">
-    <div class="project-media-content" ref="mediaContentRef">
+    <div class="project-media-content" ref="mediaContentRef" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave" @mousemove="handleMouseMove">
       <img
         v-if="props.type === 'image'"
         :src="props.src"
@@ -65,7 +101,7 @@ onMounted(async () => {
         ref="mediaRef"
       />
       <video
-        v-else
+        v-else-if="props.type === 'video'"
         :src="props.src"
         autoplay
         muted
@@ -77,8 +113,17 @@ onMounted(async () => {
       >
         <source :src="props.src" type="video/mp4" />
       </video>
+      <iframe
+        v-else-if="props.type === 'youtube'"
+        :src="`https://www.youtube.com/embed/${props.src}?rel=0`"
+        class="project-media-youtube"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        frameborder="0"
+      />
+      <div v-if="magnifierVisible && props.type === 'image'" class="project-media-magnifier" :style="magnifierStyle"></div>
     </div>
-    <div class="project-media-caption" v-if="props.caption">
+    <div :class="['project-media-caption', props.captionAlign === 'left' && 'project-media-caption-left']" v-if="props.caption">
       <Notch class="project-media-caption-notch project-media-caption-notch-left" />
       <Notch class="project-media-caption-notch project-media-caption-notch-top" />
       <p class="project-media-caption-copy">{{ props.caption }}</p>
@@ -144,6 +189,29 @@ onMounted(async () => {
       }
     }
 
+    &-left {
+      right: auto;
+      left: -1px;
+      border-radius: 0 var(--radius-md) 0 0;
+
+      @include mixins.mq("lg") {
+        border-radius: 0 var(--radius-lg) 0 0;
+      }
+
+      .project-media-caption-notch-left {
+        left: auto;
+        right: 0;
+        transform: translate(100%, 0) rotate(90deg);
+      }
+
+      .project-media-caption-notch-top {
+        top: 0;
+        right: auto;
+        left: 0;
+        transform: translate(0, -100%) rotate(90deg);
+      }
+    }
+
     &-copy {
       font-size: var(--font-size-sm);
       font-weight: 700;
@@ -166,12 +234,32 @@ onMounted(async () => {
     object-fit: cover;
   }
 
+  &-youtube {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
   &-content {
     overflow: hidden;
     border-radius: var(--radius-lg);
     background-color: var(--color-background-300);
     width: 100%;
     height: 100%;
+    position: relative;
+    cursor: none;
+  }
+
+  &-magnifier {
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    pointer-events: none;
+    z-index: 10;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    background-repeat: no-repeat;
   }
 }
 </style>

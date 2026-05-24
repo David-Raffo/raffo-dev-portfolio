@@ -111,5 +111,24 @@ const classes = computed(() => [
       }
     }
   }
+
+  &-border-dark {
+    border: 2px solid var(--color-white-400);
+    color: var(--color-white-400);
+    --icon-color: var(--color-white-400);
+    transition:
+      background-color 0.1s ease-in-out,
+      color 0.1s ease-in-out,
+      border-color 0.1s ease-in-out;
+
+    @include mixins.hover {
+      &:hover {
+        background-color: var(--color-white-400);
+        color: var(--color-black-400);
+        --icon-color: var(--color-black-400);
+        border-color: var(--color-white-400);
+      }
+    }
+  }
 }
 </style>

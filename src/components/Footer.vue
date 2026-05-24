@@ -45,7 +45,7 @@ const showAttribution = import.meta.env.VITE_SHOW_ATTRIBUTION !== "false";
           <div class="footer-top-links-legal">
             <Clickable renderAs="div">
               <Link
-                :href="locale === 'de' ? '/de/privacy' : '/privacy'"
+                :href="locale === 'es' ? '/es/privacy' : '/privacy'"
                 class="footer-link"
                 :external="true"
                 data-cursor="circle-white"
@@ -56,7 +56,7 @@ const showAttribution = import.meta.env.VITE_SHOW_ATTRIBUTION !== "false";
             </Clickable>
             <Clickable renderAs="div">
               <Link
-                :href="locale === 'de' ? '/de/legal' : '/legal'"
+                :href="locale === 'es' ? '/es/legal' : '/legal'"
                 class="footer-link children-unclickable"
                 :external="true"
                 data-cursor="circle-white"
@@ -67,40 +67,12 @@ const showAttribution = import.meta.env.VITE_SHOW_ATTRIBUTION !== "false";
             </Clickable>
           </div>
           <LangSwitch />
-        </div>
+          </div>
       </div>
       <div class="footer-credits">
-        <div v-if="showAttribution" class="footer-credits-built">
-          <p>
-            {{ t("original-concept-by") }}
-          </p>
-          <Clickable renderAs="div">
-            <Link
-              href="https://david-hckh.com"
-              class="footer-link children-unclickable"
-              external
-              data-cursor="circle-white"
-              data-hoversound="hover"
-              >David Heckhoff</Link
-            >
-          </Clickable>
-        </div>
-        <div class="footer-credits-music">
-          <p>
-            {{ t("music-produced-by") }}
-          </p>
-          <Clickable renderAs="div">
-            <Link
-              href="https://soundcloud.com/hmsurf"
-              class="footer-link children-unclickable"
-              external
-              data-cursor="circle-white"
-              data-hoversound="hover"
-              >HM Surf</Link
-            >
-          </Clickable>
-        </div>
-        <p>© {{ new Date().getFullYear() }} David Heckhoff</p>
+        <p>
+          <span v-if="showAttribution">{{ t("original-concept-by") }} <Clickable renderAs="span"><Link href="https://david-hckh.com" class="footer-link children-unclickable" external data-cursor="circle-white" data-hoversound="hover">David Heckhoff</Link></Clickable> &nbsp;·&nbsp; </span>{{ t("music-produced-by") }} <Clickable renderAs="span"><Link href="https://soundcloud.com/hmsurf" class="footer-link children-unclickable" external data-cursor="circle-white" data-hoversound="hover">HM Surf</Link></Clickable> &nbsp;·&nbsp; © {{ new Date().getFullYear() }} David Raffo
+        </p>
       </div>
     </div>
   </footer>
@@ -179,21 +151,9 @@ const showAttribution = import.meta.env.VITE_SHOW_ATTRIBUTION !== "false";
   }
 
   &-credits {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-sm);
-    width: 100%;
     font-size: var(--font-size-sm);
-    text-align: center;
-
-    &-built,
-    &-music {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: var(--space-xxs);
-    }
+    width: 100%;
+    text-align: left;
   }
 
   &-notch {

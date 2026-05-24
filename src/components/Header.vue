@@ -10,6 +10,7 @@ import { social } from "../content/social";
 import ButtonRound from "./ButtonRound.vue";
 import ArrowRight from "./icons/ArrowRight.vue";
 import SoundsToggle from "./SoundsToggle.vue";
+import LangSwitch from "./LangSwitch.vue";
 import { isFeatureEnabled } from "../utils/features";
 import { useRouter } from "../composables/useRouter";
 import { useFirstRoute } from "../composables/useFirstRoute";
@@ -81,20 +82,6 @@ const getInTouchClassNames = computed(() => {
         <ArrowRight class="header-back-icon" />
       </ButtonRound>
     </div>
-    <div
-      :class="{
-        'header-logo': true,
-        'header-logo-isProjectPage': projectId !== null,
-        'header-logo-clickable': scrolledPastHeroVisible,
-        'children-unclickable': true,
-      }"
-      @click="handleLogoClick"
-      data-sound="click"
-      data-hoversound="hover"
-      data-cursor="circle-white"
-    >
-      <Logo class="header-logo-image" />
-    </div>
     <div class="header-right">
       <Button
         renderAs="a"
@@ -107,6 +94,7 @@ const getInTouchClassNames = computed(() => {
         data-hoversound="hover"
         >{{ t("get-in-touch") }}</Button
       >
+      <LangSwitch :isDarkTheme="isDarkTheme" />
       <SoundsToggle class="header-sounds-toggle" :isDarkTheme="isDarkTheme" v-if="isFeatureEnabled('sounds')" />
     </div>
   </header>
@@ -159,7 +147,7 @@ const getInTouchClassNames = computed(() => {
     transform: translateY(-50%);
   }
 
-  &-get-in-touch {
+&-get-in-touch {
     width: fit-content;
 
     &-isProjectPage {

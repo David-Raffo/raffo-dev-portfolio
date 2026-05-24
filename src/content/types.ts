@@ -13,6 +13,8 @@ export interface ProjectContent {
   videoBorder?: boolean;
   live?: string;
   source?: string;
+  steam?: string;
+  sites?: { label: string; url: string }[];
   components?: ProjectComponent[];
 }
 

@@ -1,36 +1,36 @@
-import thumbnailCubeWar from "../../../assets/thumbnails/cubewar.webp";
-import thumbnailQuibbo from "../../../assets/thumbnails/quibbo.webp";
+import thumbnailWrenchTowers from "../../../assets/thumbnails/wrench-towers.webp";
+import thumbnailAiShopHelper from "../../../assets/thumbnails/aishophelper.webp";
 //import thumbnailParticles from "../../../assets/thumbnails/particles.webp";
-import thumbnailPokedex from "../../../assets/thumbnails/pokedex.webp";
-import thumbnailSharkie from "../../../assets/thumbnails/sharkie.webp";
-import thumbnailStreakon from "../../../assets/thumbnails/streakon.webp";
+import thumbnailWebPortfolio from "../../../assets/thumbnails/web-portfolio.webp";
+import thumbnailContextChatbot from "../../../assets/thumbnails/contextchatbot.webp";
+import thumbnailPokemonStatMaster from "../../../assets/thumbnails/pokemon-stat-master.webp";
 
 import type { ProjectPreview } from "../../types";
 
 export default [
   {
-    title: "StreakOn",
-    slug: "streakon",
-    thumbnail: thumbnailStreakon,
-    description: "Social habit tracking app",
+    title: "AI Shop Helper",
+    slug: "aishophelper",
+    thumbnail: thumbnailAiShopHelper,
+    description: "SaaS eCommerce automation with AI",
   },
   {
-    title: "CubeWar",
-    slug: "cubewar",
-    thumbnail: thumbnailCubeWar,
-    description: "Multiplayer strategy game",
+    title: "ContextChatbot",
+    slug: "contextchatbot",
+    thumbnail: thumbnailContextChatbot,
+    description: "Embeddable AI chatbot for any website",
   },
   {
-    title: "Quibbo",
-    slug: "quibbo",
-    thumbnail: thumbnailQuibbo,
-    description: "Multiplayer gaming platform",
+    title: "Web Portfolio",
+    slug: "web-portfolio",
+    thumbnail: thumbnailWebPortfolio,
+    description: "Websites built & SEO optimized",
   },
   {
-    title: "Sharkie",
-    slug: "sharkie",
-    thumbnail: thumbnailSharkie,
-    description: "2D adventure game",
+    title: "Pokémon Stat Master",
+    slug: "pokemon-stat-master",
+    thumbnail: thumbnailPokemonStatMaster,
+    description: "Pokémon trivia ranking game",
   },
   /**  {
     title: "WebGL Particles",
@@ -39,9 +39,9 @@ export default [
     description: "Dynamic 3D particles",
   }, */
   {
-    title: "Pokédex",
-    slug: "pokedex",
-    thumbnail: thumbnailPokedex,
-    description: "Open-source learning project",
+    title: "Wrench Towers",
+    slug: "wrench-towers",
+    thumbnail: thumbnailWrenchTowers,
+    description: "Pixel art tower defense game",
   },
 ] as const satisfies ProjectPreview[];

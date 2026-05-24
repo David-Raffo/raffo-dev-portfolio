@@ -13,10 +13,11 @@ const { content } = defineProps<{
 }>();
 
 const animationKey = ref(0);
+const sitesOpen = ref(false);
 
-// Force animation restart when projectId changes
 watch(projectId, () => {
   animationKey.value++;
+  sitesOpen.value = false;
 });
 </script>
 
@@ -32,7 +33,7 @@ watch(projectId, () => {
         <Tag v-for="tag in content.tags" :key="tag" :variant="tag" />
       </div>
     </div>
-    <p class="project-hero-description" v-html="content.description"></p>
+    <div class="project-hero-description" v-html="content.description"></div>
     <div class="project-hero-buttons">
       <Link v-if="content.live" :href="content.live" external class="project-hero-button" data-cursor="arrow-external">
         <Button renderAs="div" variant="accent" class="children-unclickable" data-hoversound="hover">{{
@@ -50,6 +51,33 @@ watch(projectId, () => {
           t("source-code")
         }}</Button>
       </Link>
+      <div v-if="content.sites?.length" class="project-hero-sites">
+        <Button renderAs="div" variant="accent" data-hoversound="hover" @click="sitesOpen = !sitesOpen">
+          Ver webs <span class="project-hero-sites-arrow" :class="{ 'project-hero-sites-arrow-open': sitesOpen }">▾</span>
+        </Button>
+        <div v-if="sitesOpen" class="project-hero-sites-dropdown">
+          <a
+            v-for="site in content.sites"
+            :key="site.url"
+            :href="site.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="project-hero-sites-item"
+            data-hoversound="hover"
+          >{{ site.label }}</a>
+        </div>
+      </div>
+      <Link
+        v-if="content.steam"
+        :href="content.steam"
+        external
+        class="project-hero-button"
+        data-cursor="arrow-external"
+      >
+        <Button renderAs="div" variant="border" class="children-unclickable" data-hoversound="hover">
+          Steam
+        </Button>
+      </Link>
     </div>
   </div>
 </template>
@@ -62,6 +90,44 @@ watch(projectId, () => {
 
   @include mixins.mq("md") {
     padding-bottom: 64px;
+  }
+
+  &-sites {
+    position: relative;
+    cursor: pointer;
+
+    &-arrow {
+      display: inline-block;
+      transition: transform 0.2s;
+      &-open { transform: rotate(180deg); }
+    }
+
+    &-dropdown {
+      position: absolute;
+      top: calc(100% + var(--space-xs));
+      left: 0;
+      background-color: var(--color-background-400);
+      border: var(--stroke-sm) solid var(--color-grayscale-400);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      z-index: 10;
+      min-width: 220px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+
+    &-item {
+      display: block;
+      padding: var(--space-xs) var(--space-md);
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      color: var(--color-text-400);
+      text-decoration: none;
+      transition: background-color 0.15s;
+
+      &:hover {
+        background-color: var(--color-grayscale-400);
+      }
+    }
   }
 
   &-button {
@@ -145,6 +211,19 @@ watch(projectId, () => {
     line-height: var(--line-height-copy);
     grid-column: 1 / 13;
     align-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+
+    :deep(p) {
+      color: var(--color-text-300, var(--color-text-400));
+    }
+
+    :deep(.description-hook) {
+      font-size: var(--font-size-md);
+      font-weight: 700;
+      color: var(--color-text-400);
+    }
 
     @include mixins.mq("md") {
       grid-row: 1;

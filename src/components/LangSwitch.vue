@@ -3,19 +3,21 @@ import Button from "./Button.vue";
 import { locale } from "../i18n/store";
 import { changeLocale } from "../i18n/utils/locale";
 
+defineProps<{ isDarkTheme?: boolean }>();
+
 const handleLangSwitch = () => {
-  changeLocale(locale.value === "de" ? "en" : "de");
+  changeLocale(locale.value === "es" ? "en" : "es");
 };
 </script>
 
 <template>
   <Button
-    variant="border"
+    :variant="isDarkTheme ? 'border-dark' : 'border'"
     size="sm"
     @click="handleLangSwitch"
     data-cursor="circle-white"
     data-sound="click"
     data-hoversound="hover"
-    >{{ locale === "de" ? "EN" : "DE" }}</Button
+    >{{ locale === "es" ? "EN" : "ES" }}</Button
   >
 </template>
