@@ -1,4 +1,3 @@
-import thumbnail from "../../../assets/thumbnails/aishophelper.webp";
 import img0 from "../../../assets/images/projects/aishophelper/0.webp";
 import img1 from "../../../assets/images/projects/aishophelper/1.webp";
 import img2 from "../../../assets/images/projects/aishophelper/2.webp";

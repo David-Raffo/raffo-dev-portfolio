@@ -71,7 +71,7 @@ const showAttribution = import.meta.env.VITE_SHOW_ATTRIBUTION !== "false";
       </div>
       <div class="footer-credits">
         <p>
-          <span v-if="showAttribution">{{ t("original-concept-by") }} <Clickable renderAs="span"><Link href="https://david-hckh.com" class="footer-link children-unclickable" external data-cursor="circle-white" data-hoversound="hover">David Heckhoff</Link></Clickable> &nbsp;·&nbsp; </span>{{ t("music-produced-by") }} <Clickable renderAs="span"><Link href="https://soundcloud.com/hmsurf" class="footer-link children-unclickable" external data-cursor="circle-white" data-hoversound="hover">HM Surf</Link></Clickable> &nbsp;·&nbsp; © {{ new Date().getFullYear() }} David Raffo
+          <span v-if="showAttribution">{{ t("original-concept-by") }} <Clickable renderAs="div"><Link href="https://david-hckh.com" class="footer-link children-unclickable" external data-cursor="circle-white" data-hoversound="hover">David Heckhoff</Link></Clickable> &nbsp;·&nbsp; </span>{{ t("music-produced-by") }} <Clickable renderAs="div"><Link href="https://soundcloud.com/hmsurf" class="footer-link children-unclickable" external data-cursor="circle-white" data-hoversound="hover">HM Surf</Link></Clickable> &nbsp;·&nbsp; © {{ new Date().getFullYear() }} David Raffo
         </p>
       </div>
     </div>

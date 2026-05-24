@@ -1,4 +1,3 @@
-import thumbnail from "../../../assets/thumbnails/wrench-towers.webp";
 import img0 from "../../../assets/images/projects/wrench-towers/0.png";
 import img1 from "../../../assets/images/projects/wrench-towers/1.png";
 import img2 from "../../../assets/images/projects/wrench-towers/2.png";

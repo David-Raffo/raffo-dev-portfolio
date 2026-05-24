@@ -1,4 +1,3 @@
-import thumbnail from "../../../assets/thumbnails/web-portfolio.webp";
 import imgSlazenger from "../../../assets/images/projects/web-portfolio/slazenger.webp";
 import imgNersa from "../../../assets/images/projects/web-portfolio/nersa.webp";
 import imgIturri from "../../../assets/images/projects/web-portfolio/iturri.webp";

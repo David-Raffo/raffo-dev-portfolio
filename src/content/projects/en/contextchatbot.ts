@@ -1,4 +1,3 @@
-import thumbnail from "../../../assets/thumbnails/contextchatbot.webp";
 import img0 from "../../../assets/images/projects/ContextChatbot/0.gif";
 import img1 from "../../../assets/images/projects/ContextChatbot/1.webp";
 

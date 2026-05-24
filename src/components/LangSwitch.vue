@@ -12,7 +12,7 @@ const handleLangSwitch = () => {
 
 <template>
   <Button
-    :variant="isDarkTheme ? 'border-dark' : 'border'"
+    variant="border"
     size="sm"
     @click="handleLangSwitch"
     data-cursor="circle-white"

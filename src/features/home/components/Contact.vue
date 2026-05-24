@@ -32,9 +32,9 @@ const mottoTextRef = ref<HTMLElement | null>(null);
 let mottoTrigger: ScrollTrigger | null = null;
 let mottoInterval: ReturnType<typeof setInterval> | null = null;
 
-const mottos = computed(() => mottosByLocale[locale.value ?? "es"] ?? mottosByLocale.es);
+const mottos = computed(() => mottosByLocale[locale.value ?? "es"] ?? mottosByLocale["es"]!);
 const mottoIndex = ref(0);
-const currentMotto = computed(() => mottos.value[mottoIndex.value]);
+const currentMotto = computed(() => mottos.value[mottoIndex.value] ?? "");
 
 const cycleMotto = () => {
   if (!mottoTextRef.value) return;
@@ -42,7 +42,7 @@ const cycleMotto = () => {
     opacity: 0,
     duration: 0.8,
     onComplete: () => {
-      mottoIndex.value = (mottoIndex.value + 1) % mottos.value.length;
+      mottoIndex.value = (mottoIndex.value + 1) % (mottos.value?.length ?? 1);
       gsap.to(mottoTextRef.value, { opacity: 1, duration: 0.8 });
     },
   });
