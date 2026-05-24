@@ -3,7 +3,7 @@ import { computed } from "vue";
 
 export interface Props {
   renderAs?: "button" | "a" | "div";
-  variant?: "accent" | "border" | "theme" | "background" | "gray";
+  variant?: "accent" | "border" | "border-dark" | "theme" | "background" | "gray";
   rounded?: boolean;
 }
 

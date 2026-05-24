@@ -35,7 +35,7 @@ const showAttribution = import.meta.env.VITE_SHOW_ATTRIBUTION !== "false";
         data-cursor="circle-white"
         data-sound="click"
       >
-        <ButtonRound renderAs="div" variant="border" class="children-unclickable" data-hoversound="hover">
+        <ButtonRound renderAs="span" variant="border" class="children-unclickable" data-hoversound="hover">
           <ArrowRightLong class="footer-back-to-top-icon" />
         </ButtonRound>
       </div>
@@ -43,7 +43,7 @@ const showAttribution = import.meta.env.VITE_SHOW_ATTRIBUTION !== "false";
         <Social v-if="withSocial" />
         <div class="footer-top-links">
           <div class="footer-top-links-legal">
-            <Clickable renderAs="div">
+            <Clickable renderAs="span">
               <Link
                 :href="locale === 'es' ? '/es/privacy' : '/privacy'"
                 class="footer-link"
@@ -54,7 +54,7 @@ const showAttribution = import.meta.env.VITE_SHOW_ATTRIBUTION !== "false";
                 >{{ t("privacy") }}</Link
               >
             </Clickable>
-            <Clickable renderAs="div">
+            <Clickable renderAs="span">
               <Link
                 :href="locale === 'es' ? '/es/legal' : '/legal'"
                 class="footer-link children-unclickable"
@@ -71,7 +71,7 @@ const showAttribution = import.meta.env.VITE_SHOW_ATTRIBUTION !== "false";
       </div>
       <div class="footer-credits">
         <p>
-          <span v-if="showAttribution">{{ t("original-concept-by") }} <Clickable renderAs="div"><Link href="https://david-hckh.com" class="footer-link children-unclickable" external data-cursor="circle-white" data-hoversound="hover">David Heckhoff</Link></Clickable> &nbsp;·&nbsp; </span>{{ t("music-produced-by") }} <Clickable renderAs="div"><Link href="https://soundcloud.com/hmsurf" class="footer-link children-unclickable" external data-cursor="circle-white" data-hoversound="hover">HM Surf</Link></Clickable> &nbsp;·&nbsp; © {{ new Date().getFullYear() }} David Raffo
+          <span v-if="showAttribution">{{ t("original-concept-by") }} <Clickable renderAs="span"><Link href="https://david-hckh.com" class="footer-link children-unclickable" external data-cursor="circle-white" data-hoversound="hover">David Heckhoff</Link></Clickable> &nbsp;·&nbsp; </span>{{ t("music-produced-by") }} <Clickable renderAs="span"><Link href="https://soundcloud.com/hmsurf" class="footer-link children-unclickable" external data-cursor="circle-white" data-hoversound="hover">HM Surf</Link></Clickable> &nbsp;·&nbsp; © {{ new Date().getFullYear() }} David Raffo
         </p>
       </div>
     </div>

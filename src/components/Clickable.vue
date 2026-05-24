@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  renderAs?: "button" | "a" | "div";
+  renderAs?: "button" | "a" | "div" | "span";
 }>();
 </script>
 
