@@ -2,15 +2,14 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import glsl from "vite-plugin-glsl";
 
+import { cloudflare } from "@cloudflare/vite-plugin";
+
 export default defineConfig({
-  plugins: [
-    vue(),
-    glsl({
-      include: ["**/*.glsl", "**/*.vert", "**/*.frag"],
-      defaultExtension: "glsl",
-      warnDuplicatedImports: false,
-    }),
-  ],
+  plugins: [vue(), glsl({
+    include: ["**/*.glsl", "**/*.vert", "**/*.frag"],
+    defaultExtension: "glsl",
+    warnDuplicatedImports: false,
+  }), cloudflare()],
   server: {
     port: 3000,
     strictPort: true,
