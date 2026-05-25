@@ -161,7 +161,7 @@ watch(
       <div ref="contactRef" class="home-contact">
         <Contact id="contact" v-if="projectsLoaded" />
       </div>
-      <Footer :withSocial="false"></Footer>
+      <Footer></Footer>
     </Layout>
   </div>
   <HeaderHome v-if="projectsLoaded" />

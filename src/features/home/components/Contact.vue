@@ -154,6 +154,26 @@ onUnmounted(() => {
       grid-column: 8 / 13;
     }
 
+    @include mixins.mq("xl") {
+      grid-column: 8 / 12;
+      padding-top: calc(var(--lvh) * 2);
+    }
+
+    @include mixins.mq("xxl") {
+      grid-column: 8 / 13;
+      padding-top: calc(var(--lvh) * 12);
+    }
+
+    @include mixins.mq("xxxl") {
+      grid-column: 8 / 15;
+      padding-top: calc(var(--lvh) * 6);
+    }
+
+    @include mixins.mq(2000) {
+      grid-column: 8 / 15;
+      padding-top: calc(var(--lvh) * 10);
+    }
+
     &-bubble {
       display: none;
 
@@ -172,18 +192,18 @@ onUnmounted(() => {
         &::after {
           content: "";
           position: absolute;
-          width: 0;
-          height: 0;
+          width: 14px;
+          height: 14px;
           border-radius: 50%;
-          left: 14px;
-          bottom: -12px;
+          background-color: var(--color-background-400, var(--color-beige-400));
+          border: var(--stroke-sm) solid currentColor;
+          left: 7px;
+          bottom: -22px;
           box-shadow:
-            0px 0px 0 7px var(--color-background-400, var(--color-beige-400)),
-            0px 0px 0 8px currentColor,
-            -14px 14px 0 4px var(--color-background-400, var(--color-beige-400)),
-            -14px 14px 0 5px currentColor,
-            -26px 26px 0 2px var(--color-background-400, var(--color-beige-400)),
-            -26px 26px 0 3px currentColor;
+            -16px 16px 0 -3px var(--color-background-400, var(--color-beige-400)),
+            -16px 16px 0 -2px currentColor,
+            -28px 28px 0 -5px var(--color-background-400, var(--color-beige-400)),
+            -28px 28px 0 -4px currentColor;
         }
       }
 
