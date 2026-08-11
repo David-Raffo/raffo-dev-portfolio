@@ -53,7 +53,8 @@ watch(projectId, () => {
       </Link>
       <div v-if="content.sites?.length" class="project-hero-sites">
         <Button renderAs="div" variant="accent" data-hoversound="hover" @click="sitesOpen = !sitesOpen">
-          Ver webs <span class="project-hero-sites-arrow" :class="{ 'project-hero-sites-arrow-open': sitesOpen }">▾</span>
+          {{ t("view-sites") }}
+          <span class="project-hero-sites-arrow" :class="{ 'project-hero-sites-arrow-open': sitesOpen }">▾</span>
         </Button>
         <div v-if="sitesOpen" class="project-hero-sites-dropdown">
           <a

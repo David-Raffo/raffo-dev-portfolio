@@ -17,6 +17,7 @@ export type TagVariant =
   | "pokeapi"
   | "python"
   | "n8n"
+  | "rag"
   | "langgraph"
   | "docker"
   | "openrouter"
@@ -51,6 +52,7 @@ export const tagLabels = {
   pokeapi: "PokéAPI",
   python: "Python",
   n8n: "n8n",
+  rag: "RAG",
   langgraph: "LangGraph",
   docker: "Docker",
   openrouter: "OpenRouter",

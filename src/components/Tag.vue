@@ -142,6 +142,11 @@ const classes = computed(() => ["tag", `tag-variant-${props.variant}`]);
       color: white;
     }
 
+    &-rag {
+      background-color: #0d9488;
+      color: white;
+    }
+
     &-langgraph {
       background-color: #1a1a1a;
       color: white;
