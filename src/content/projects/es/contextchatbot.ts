@@ -1,4 +1,4 @@
-import img0 from "../../../assets/images/projects/ContextChatbot/0.gif";
+import video0 from "../../../assets/images/projects/ContextChatbot/0.mp4";
 import img1 from "../../../assets/images/projects/ContextChatbot/1.webp";
 
 import type { ProjectContent } from "../../types";
@@ -15,8 +15,8 @@ export default {
     {
       type: "media",
       props: {
-        type: "image",
-        src: img0,
+        type: "video",
+        src: video0,
         alt: "Chatbot en vivo",
         caption: "Chatbot en vivo",
         captionAlign: "left",

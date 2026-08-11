@@ -11,7 +11,9 @@ function simplifyModules(glob: Record<string, any>) {
   return result;
 }
 
+// lazy: project copy and its image urls are only needed once a project opens,
+// so they stay out of the home page chunk
 export const projectModules = {
-  es: simplifyModules(import.meta.glob("./es/*.ts", { eager: true })),
-  en: simplifyModules(import.meta.glob("./en/*.ts", { eager: true })),
-} as const satisfies Record<Locale, Record<string, any>>;
+  es: simplifyModules(import.meta.glob("./es/*.ts")),
+  en: simplifyModules(import.meta.glob("./en/*.ts")),
+} as const satisfies Record<Locale, Record<string, () => Promise<any>>>;

@@ -38,6 +38,15 @@ export default defineConfig({
         assetFileNames: "assets/[hash].[ext]",
         entryFileNames: "chunks/[name]-[hash].js",
         chunkFileNames: "chunks/[hash].js",
+        // split vendors so a code change doesn't invalidate the (heavy, stable)
+        // three/gsap/vue chunks in the browser cache
+        manualChunks: (id) => {
+          if (!id.includes("node_modules")) return;
+          if (id.includes("/three/")) return "three";
+          if (id.includes("/gsap/")) return "gsap";
+          if (id.includes("/@vue/") || id.includes("/vue/")) return "vue";
+          return "vendor";
+        },
       },
     },
   },

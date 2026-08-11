@@ -1,7 +1,7 @@
-import img0 from "../../../assets/images/projects/wrench-towers/0.png";
-import img1 from "../../../assets/images/projects/wrench-towers/1.png";
-import img2 from "../../../assets/images/projects/wrench-towers/2.png";
-import img3 from "../../../assets/images/projects/wrench-towers/3.png";
+import img0 from "../../../assets/images/projects/wrench-towers/0.webp";
+import img1 from "../../../assets/images/projects/wrench-towers/1.webp";
+import img2 from "../../../assets/images/projects/wrench-towers/2.webp";
+import img3 from "../../../assets/images/projects/wrench-towers/3.webp";
 
 import type { ProjectContent } from "../../types";
 

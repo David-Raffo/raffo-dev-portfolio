@@ -7,7 +7,7 @@ import contactTexture from "./assets/textures/contact.webp";
 import contactShadowTexture from "./assets/textures/contact-shadow.webp";
 import desktopsTexture from "./assets/textures/desktops.webp";
 import diffuseMap from "./assets/textures/diffuse-map.png";
-import faceTexture from "./assets/textures/face-spritesheet.png";
+import faceTexture from "./assets/textures/face-spritesheet.webp";
 import headTexture from "./assets/textures/head.webp";
 import iconSpritesheet from "./assets/textures/icon-spritesheet.webp";
 import matcapBlack from "./assets/textures/matcap-black.webp";
