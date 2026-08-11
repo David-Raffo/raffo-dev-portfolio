@@ -113,7 +113,9 @@ const tick = () => {
   } else {
     const isAbout = sceneWeights.about > 0.1;
     if (isAbout) {
-      uniforms.uFrame.value = FRAME_INDEXES["default-0"];
+      // "default" frames have no mouth in the spritesheet, so the straight
+      // t-idle pose uses the "proud" frame to keep it
+      uniforms.uFrame.value = FRAME_INDEXES["proud-0"];
     } else {
       const name = sceneFrames.intro.startsWith("default")
         ? `default-${Math.round(blinkFrame.value)}`
