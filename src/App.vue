@@ -14,6 +14,7 @@ import { useScroll } from "./composables/useScroll";
 import { projectVisible } from "./composables/useRouteObserver";
 import ProjectBackground from "./features/projects/components/ProjectBackground.vue";
 import { useClickSound } from "./features/sounds/composables/useClickSounds";
+import ChatbotWidget from "./components/ChatbotWidget.vue";
 //import { useHoverSound } from "./features/sounds/composables/useHoverSounds";
 
 const { isTransitioning } = useProjectTransition();
@@ -50,6 +51,8 @@ const { isTouch } = useAgent();
       <Project />
     </div>
   </div>
+
+  <ChatbotWidget />
 
   <Cursor v-if="!isTouch" />
 </template>
