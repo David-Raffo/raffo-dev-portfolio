@@ -7,6 +7,7 @@
   "chat-error": "The chat could not be loaded.",
   "chat-greeting": "Hi! I'm David's assistant. How can I help you?",
   "chat-loading": "Loading the chat…",
+  "chat-nudge": "Hi! I'm here to help",
   "chat-open": "Open chat",
   "chat-placeholder": "Type your message…",
   "chat-retry": "Retry",

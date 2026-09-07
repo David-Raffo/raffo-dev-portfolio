@@ -8,14 +8,21 @@ import { preloaderVisible } from "../composables/usePreloader";
 
 const WEBHOOK_URL = "https://n8n.raffo.dev/webhook/abe098fb-3fc4-4ca3-bf58-3fc49d28fae6/chat";
 
+const NUDGE_DELAY = 3000;
+const NUDGE_DURATION = 9000;
+
 type ChatApp = { unmount: () => void };
 
 const isOpen = ref(false);
 const isLoading = ref(false);
 const hasFailed = ref(false);
+const showNudge = ref(false);
+const hasInteracted = ref(false);
 const toggleRef = ref<HTMLButtonElement | null>(null);
 const mountRef = ref<HTMLElement | null>(null);
 const chatApp = shallowRef<ChatApp | null>(null);
+
+/* --- chat --- */
 
 const mountChat = async () => {
   if (chatApp.value || isLoading.value) return;
@@ -61,7 +68,41 @@ const destroyChat = () => {
   chatApp.value = null;
 };
 
+/* --- nudge --- */
+
+let nudgeShowTimer: number | undefined;
+let nudgeHideTimer: number | undefined;
+
+const clearNudgeTimers = () => {
+  window.clearTimeout(nudgeShowTimer);
+  window.clearTimeout(nudgeHideTimer);
+};
+
+const dismissNudge = () => {
+  showNudge.value = false;
+  clearNudgeTimers();
+};
+
+watch(
+  preloaderVisible,
+  (visible) => {
+    if (visible || hasInteracted.value) return;
+
+    clearNudgeTimers();
+    nudgeShowTimer = window.setTimeout(() => {
+      if (hasInteracted.value) return;
+      showNudge.value = true;
+      nudgeHideTimer = window.setTimeout(dismissNudge, NUDGE_DURATION);
+    }, NUDGE_DELAY);
+  },
+  { immediate: true },
+);
+
+/* --- open / close --- */
+
 const open = () => {
+  hasInteracted.value = true;
+  dismissNudge();
   isOpen.value = true;
   mountChat();
 };
@@ -94,6 +135,7 @@ watch(locale, () => {
 
 onBeforeUnmount(() => {
   window.removeEventListener("keydown", handleKeydown);
+  clearNudgeTimers();
   destroyChat();
 });
 </script>
@@ -136,6 +178,19 @@ onBeforeUnmount(() => {
         </div>
       </div>
 
+      <Transition name="chatbot-nudge">
+        <button
+          v-if="showNudge && !isOpen"
+          type="button"
+          class="chatbot-nudge"
+          data-sound="click"
+          data-hoversound="hover"
+          @click="open"
+        >
+          {{ t("chat-nudge") }}
+        </button>
+      </Transition>
+
       <button
         ref="toggleRef"
         type="button"
@@ -164,6 +219,24 @@ onBeforeUnmount(() => {
   opacity: 0;
 }
 
+.chatbot-nudge-enter-active {
+  transition:
+    opacity 0.35s ease-out,
+    transform 0.35s var(--ease-power2-out);
+}
+
+.chatbot-nudge-leave-active {
+  transition:
+    opacity 0.25s ease-in,
+    transform 0.25s ease-in;
+}
+
+.chatbot-nudge-enter-from,
+.chatbot-nudge-leave-to {
+  opacity: 0;
+  transform: translateY(8px) scale(0.94);
+}
+
 .chatbot {
   position: fixed;
   right: var(--space-outer);
@@ -173,27 +246,33 @@ onBeforeUnmount(() => {
   flex-direction: column;
   align-items: flex-end;
   gap: var(--space-xs);
+  // the closed panel still occupies its box, so the wrapper must not swallow
+  // clicks meant for the page underneath it
+  pointer-events: none;
 
   &-toggle {
     position: relative;
     width: 58px;
     height: 58px;
-    padding: 13px;
+    padding: 11px;
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    background-color: var(--color-text-400);
-    --icon-color: var(--color-background-400);
+    pointer-events: auto;
+    background-color: var(--color-accent-400, var(--color-orange-400));
+    --icon-color: var(--color-accent-text-400, var(--color-white-400));
     box-shadow: 0 6px 20px rgb(0 0 0 / 18%);
     transition:
       transform 0.2s var(--ease-power2-out),
-      background-color 0.2s ease-in-out;
+      box-shadow 0.2s ease-in-out;
 
     @include mixins.hover {
+      // keeps the accent colour on hover, a halo instead of a colour swap
       &:hover {
         transform: scale(1.08);
-        background-color: var(--color-accent-400, var(--color-orange-400));
-        --icon-color: var(--color-accent-text-400, var(--color-white-400));
+        box-shadow:
+          0 6px 20px rgb(0 0 0 / 18%),
+          0 0 0 6px color-mix(in srgb, var(--color-accent-400, var(--color-orange-400)) 24%, transparent);
       }
     }
 
@@ -204,14 +283,14 @@ onBeforeUnmount(() => {
     &-icon {
       width: 100%;
       height: 100%;
-      --stroke-width: var(--stroke-lg);
+      --stroke-width: var(--stroke-md);
       transition:
         transform 0.25s var(--ease-power2-out),
         opacity 0.25s ease-in-out;
     }
 
     // the robot's antenna blinks, just enough to catch the eye
-    :deep(.chatbot-antenna) {
+    :deep(.robot-antenna) {
       animation: chatbot-blink 2.4s var(--ease-smooth) infinite;
     }
 
@@ -230,6 +309,54 @@ onBeforeUnmount(() => {
     80%,
     90% {
       opacity: 0.2;
+    }
+  }
+
+  &-nudge {
+    position: relative;
+    max-width: min(calc(var(--svw) * 100 - var(--space-outer) * 2), 250px);
+    margin-bottom: var(--space-xxs);
+    padding: var(--space-xs) var(--space-sm);
+    border: var(--stroke-md) solid var(--color-grayscale-400);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    pointer-events: auto;
+    text-align: left;
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    line-height: var(--line-height-copy);
+    color: var(--color-text-400);
+    background-color: var(--color-background-400);
+    box-shadow: 0 6px 20px rgb(0 0 0 / 12%);
+    transition:
+      transform 0.2s var(--ease-power2-out),
+      border-color 0.15s ease-in-out;
+
+    // little tail pointing down at the bubble
+    &::after {
+      content: "";
+      position: absolute;
+      right: 20px;
+      bottom: calc(var(--stroke-md) * -1);
+      width: 12px;
+      height: 12px;
+      transform: translateY(50%) rotate(45deg);
+      border: var(--stroke-md) solid var(--color-grayscale-400);
+      border-top: none;
+      border-left: none;
+      border-bottom-right-radius: 2px;
+      background-color: var(--color-background-400);
+    }
+
+    @include mixins.hover {
+      &:hover {
+        transform: translateY(-2px);
+        border-color: var(--color-accent-400, var(--color-orange-400));
+
+        &::after {
+          border-color: var(--color-accent-400, var(--color-orange-400));
+        }
+      }
     }
   }
 
@@ -253,6 +380,7 @@ onBeforeUnmount(() => {
       visibility 0.28s;
 
     &-open {
+      pointer-events: auto;
       transform: translateY(0) scale(1);
       opacity: 1;
       visibility: visible;
@@ -270,6 +398,7 @@ onBeforeUnmount(() => {
       &-icon {
         width: var(--icon-size-sm);
         flex-shrink: 0;
+        --stroke-width: var(--stroke-sm);
       }
 
       &-title {
@@ -318,12 +447,12 @@ onBeforeUnmount(() => {
       height: 100%;
 
       // theme the embedded chat with the portfolio palette
-      --chat--color--primary: var(--color-text-400);
-      --chat--color--primary-shade-50: var(--color-text-300);
-      --chat--color--primary--shade-100: var(--color-text-300);
+      --chat--color--primary: var(--color-accent-400, var(--color-orange-400));
+      --chat--color--primary-shade-50: var(--color-accent-400, var(--color-orange-400));
+      --chat--color--primary--shade-100: var(--color-accent-400, var(--color-orange-400));
       --chat--color--secondary: var(--color-text-400);
       --chat--color-white: var(--color-background-400);
-      --chat--color-light: var(--color-beige-500);
+      --chat--color-light: var(--color-background-400);
       --chat--color-light-shade-50: var(--color-beige-600);
       --chat--color-light-shade-100: var(--color-grayscale-400);
       --chat--color-medium: var(--color-grayscale-500);
@@ -336,12 +465,15 @@ onBeforeUnmount(() => {
       --chat--message--border-radius: var(--radius-md);
       --chat--message--bot--background: var(--color-beige-600);
       --chat--message--bot--color: var(--color-text-400);
-      --chat--message--user--background: var(--color-text-400);
-      --chat--message--user--color: var(--color-background-400);
+      --chat--message--user--background: var(--color-accent-400, var(--color-orange-400));
+      --chat--message--user--color: var(--color-accent-text-400, var(--color-white-400));
+      // the footer would otherwise draw a light rule across the top of the input
+      --chat--footer--background: var(--color-background-400);
+      --chat--footer--border-top: none;
       --chat--input--font-size: var(--font-size-sm);
       --chat--input--background: var(--color-background-400);
+      --chat--input--container--background: var(--color-background-400);
       --chat--input--text-color: var(--color-text-400);
-      --chat--input--border: var(--stroke-md) solid var(--color-grayscale-400);
       --chat--input--send--button--background: transparent;
       --chat--input--send--button--color: var(--color-text-400);
       --chat--input--send--button--background-hover: transparent;

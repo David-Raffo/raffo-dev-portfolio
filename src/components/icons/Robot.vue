@@ -1,9 +1,9 @@
 <template>
   <svg viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" overflow="visible">
     <!-- antenna -->
-    <circle cx="128" cy="18" r="14" fill="var(--icon-color)" class="chatbot-antenna" />
+    <circle cx="128" cy="28" r="10" fill="var(--icon-color)" class="robot-antenna" />
     <path
-      d="M128 32V56"
+      d="M128 38V64"
       stroke="var(--icon-color)"
       stroke-width="var(--stroke-width, var(--stroke-md))"
       stroke-linecap="round"
@@ -12,14 +12,14 @@
 
     <!-- ears -->
     <path
-      d="M30 112V152"
+      d="M28 126V152"
       stroke="var(--icon-color)"
       stroke-width="var(--stroke-width, var(--stroke-md))"
       stroke-linecap="round"
       vector-effect="non-scaling-stroke"
     />
     <path
-      d="M226 112V152"
+      d="M228 126V152"
       stroke="var(--icon-color)"
       stroke-width="var(--stroke-width, var(--stroke-md))"
       stroke-linecap="round"
@@ -28,23 +28,23 @@
 
     <!-- head -->
     <rect
-      x="46"
-      y="56"
-      width="164"
-      height="150"
-      rx="42"
+      x="44"
+      y="64"
+      width="168"
+      height="146"
+      rx="50"
       stroke="var(--icon-color)"
       stroke-width="var(--stroke-width, var(--stroke-md))"
       vector-effect="non-scaling-stroke"
     />
 
     <!-- eyes -->
-    <circle cx="98" cy="118" r="15" fill="var(--icon-color)" />
-    <circle cx="158" cy="118" r="15" fill="var(--icon-color)" />
+    <circle cx="98" cy="132" r="15" fill="var(--icon-color)" />
+    <circle cx="158" cy="132" r="15" fill="var(--icon-color)" />
 
     <!-- mouth -->
     <path
-      d="M98 162C107 173 118 178 128 178C138 178 149 173 158 162"
+      d="M102 176C112 189 121 193 128 193C135 193 144 189 154 176"
       stroke="var(--icon-color)"
       stroke-width="var(--stroke-width, var(--stroke-md))"
       stroke-linecap="round"
