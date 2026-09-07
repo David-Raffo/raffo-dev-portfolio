@@ -10,6 +10,8 @@ const WEBHOOK_URL = "https://n8n.raffo.dev/webhook/abe098fb-3fc4-4ca3-bf58-3fc49
 
 const NUDGE_DELAY = 3000;
 const NUDGE_DURATION = 9000;
+// breathing room left above an incoming message when it is anchored
+const MESSAGE_TOP_GAP = 12;
 
 type ChatApp = { unmount: () => void };
 
@@ -21,6 +23,8 @@ const hasInteracted = ref(false);
 const toggleRef = ref<HTMLButtonElement | null>(null);
 const mountRef = ref<HTMLElement | null>(null);
 const chatApp = shallowRef<ChatApp | null>(null);
+
+let messageObserver: MutationObserver | null = null;
 
 /* --- chat --- */
 
@@ -56,6 +60,9 @@ const mountChat = async () => {
         },
       },
     });
+
+    await nextTick();
+    anchorIncomingMessages();
   } catch {
     hasFailed.value = true;
   } finally {
@@ -63,7 +70,38 @@ const mountChat = async () => {
   }
 };
 
+// @n8n/chat scrolls every incoming message into view, which parks the viewport at
+// the end of a long answer and forces the reader back up to its first line. Anchor
+// the top of the message instead, and only when it is too tall to fit: a short one
+// still settles at the bottom, where it belongs.
+const anchorIncomingMessages = () => {
+  const body = mountRef.value?.querySelector<HTMLElement>(".chat-body");
+  if (!body) return;
+
+  messageObserver = new MutationObserver((records) => {
+    const message = records
+      .flatMap((record) => [...record.addedNodes])
+      .find(
+        (node): node is HTMLElement =>
+          node instanceof HTMLElement && node.classList.contains("chat-message-from-bot"),
+      );
+
+    if (!message) return;
+
+    requestAnimationFrame(() => {
+      const bodyRect = body.getBoundingClientRect();
+      const messageRect = message.getBoundingClientRect();
+      if (messageRect.height <= bodyRect.height - MESSAGE_TOP_GAP * 2) return;
+      body.scrollTop += messageRect.top - bodyRect.top - MESSAGE_TOP_GAP;
+    });
+  });
+
+  messageObserver.observe(body, { childList: true, subtree: true });
+};
+
 const destroyChat = () => {
+  messageObserver?.disconnect();
+  messageObserver = null;
   chatApp.value?.unmount();
   chatApp.value = null;
 };
@@ -143,7 +181,14 @@ onBeforeUnmount(() => {
 <template>
   <Transition name="chatbot">
     <div v-if="!preloaderVisible" class="chatbot">
-      <div class="chatbot-panel" :class="{ 'chatbot-panel-open': isOpen }" :inert="!isOpen" :aria-hidden="!isOpen">
+      <!-- data-lenis-prevent: without it lenis swallows the wheel and scrolls the page -->
+      <div
+        class="chatbot-panel"
+        :class="{ 'chatbot-panel-open': isOpen }"
+        :inert="!isOpen"
+        :aria-hidden="!isOpen"
+        data-lenis-prevent
+      >
         <div class="chatbot-panel-header">
           <Robot class="chatbot-panel-header-icon" />
           <p class="chatbot-panel-header-title">{{ t("chat-title") }}</p>
