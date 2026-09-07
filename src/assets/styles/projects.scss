@@ -96,22 +96,6 @@
   --color-background-300: #f0fdf4;
 }
 
-.project-wrench-towers {
-  --color-text-400: #ffffff;
-  --color-text-300: #e0e0e0;
-
-  --color-accent-400: #a855f7;
-  --color-accent-text-400: white;
-
-  --color-hover: #1e0040;
-
-  --color-grayscale-500: #4a1a8a;
-  --color-grayscale-400: #4a1a8a;
-
-  --color-background-400: #4a1a8a;
-  --color-background-300: #35016D;
-}
-
 .project-contextchatbot {
   --color-text-400: #000000;
   --color-text-300: #333333;
@@ -144,21 +128,38 @@
   --color-background-300: white;
 }
 
-.project-pokemon-stat-master {
-  --color-text-400: #1a0000;
-  --color-text-300: #5c1a1a;
+.project-ai-web-apps {
+  --color-text-400: #14181f;
+  --color-text-300: #4d5665;
 
-  --color-accent-400: #cc0000;
+  --color-accent-400: #6d28d9;
   --color-accent-text-400: white;
 
-  --color-hover: #1a0000;
+  --color-hover: #14181f;
   --color-hover-text: #ffffff;
 
-  --color-grayscale-500: #f5c5c5;
-  --color-grayscale-400: #f5c5c5;
+  --color-grayscale-500: #e2ddf2;
+  --color-grayscale-400: #e2ddf2;
 
-  --color-background-400: #fde8e8;
-  --color-background-300: #fff5f5;
+  --color-background-400: #f2effb;
+  --color-background-300: #faf9fe;
+}
+
+.project-freerouter {
+  --color-text-400: #f5efe6;
+  --color-text-300: #a9b0b7;
+
+  --color-accent-400: #ff8400;
+  --color-accent-text-400: #14161b;
+
+  --color-hover: #f5efe6;
+  --color-hover-text: #14161b;
+
+  --color-grayscale-500: #262b34;
+  --color-grayscale-400: #262b34;
+
+  --color-background-400: #1b1f27;
+  --color-background-300: #14161b;
 }
 
 .project-streakon {

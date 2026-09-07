@@ -67,6 +67,16 @@ const classes = computed(() => ["tag", `tag-variant-${props.variant}`]);
       color: white;
     }
 
+    &-fastify {
+      background-color: #3b4149;
+      color: white;
+    }
+
+    &-sqlite {
+      background-color: #0b4f6c;
+      color: white;
+    }
+
     &-next {
       background-color: white;
       color: black;

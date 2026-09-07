@@ -1,9 +1,9 @@
-import thumbnailWrenchTowers from "../../../assets/thumbnails/wrench-towers.webp";
 import thumbnailAiShopHelper from "../../../assets/thumbnails/aishophelper.webp";
 //import thumbnailParticles from "../../../assets/thumbnails/particles.webp";
 import thumbnailWebPortfolio from "../../../assets/thumbnails/web-portfolio.webp";
 import thumbnailContextChatbot from "../../../assets/thumbnails/contextchatbot.webp";
-import thumbnailPokemonStatMaster from "../../../assets/thumbnails/pokemon-stat-master.webp";
+import thumbnailFreeRouter from "../../../assets/thumbnails/freerouter.webp";
+import thumbnailAiWebApps from "../../../assets/thumbnails/ai-web-apps.webp";
 
 import type { ProjectPreview } from "../../types";
 
@@ -21,16 +21,10 @@ export default [
     description: "Embeddable AI chatbot for any website",
   },
   {
-    title: "Web Portfolio",
-    slug: "web-portfolio",
-    thumbnail: thumbnailWebPortfolio,
-    description: "Websites built & SEO optimized",
-  },
-  {
-    title: "Pokémon Stat Master",
-    slug: "pokemon-stat-master",
-    thumbnail: thumbnailPokemonStatMaster,
-    description: "Pokémon trivia ranking game",
+    title: "FreeRouter",
+    slug: "freerouter",
+    thumbnail: thumbnailFreeRouter,
+    description: "Inference router over 24 free providers",
   },
   /**  {
     title: "WebGL Particles",
@@ -39,9 +33,15 @@ export default [
     description: "Dynamic 3D particles",
   }, */
   {
-    title: "Wrench Towers",
-    slug: "wrench-towers",
-    thumbnail: thumbnailWrenchTowers,
-    description: "Pixel art tower defense game",
+    title: "AI Web Apps",
+    slug: "ai-web-apps",
+    thumbnail: thumbnailAiWebApps,
+    description: "Small apps built with AI",
+  },
+  {
+    title: "Web Portfolio",
+    slug: "web-portfolio",
+    thumbnail: thumbnailWebPortfolio,
+    description: "Websites built & SEO optimized",
   },
 ] as const satisfies ProjectPreview[];

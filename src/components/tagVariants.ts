@@ -8,6 +8,8 @@ export type TagVariant =
   | "css"
   | "javascript"
   | "node"
+  | "fastify"
+  | "sqlite"
   | "next"
   | "kubernetes"
   | "postgresql"
@@ -43,6 +45,8 @@ export const tagLabels = {
   css: "CSS",
   javascript: "JavaScript",
   node: "Node.js",
+  fastify: "Fastify",
+  sqlite: "SQLite",
   next: "Next.js",
   kubernetes: "Kubernetes",
   postgresql: "PostgreSQL",
