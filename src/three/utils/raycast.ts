@@ -16,9 +16,14 @@ const target = new Vector3();
 const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
 const updatePointer = (clientX: number, clientY: number) => {
-  // Convert to normalized device coordinates (-1 to 1)
-  pointer.x = (clientX / threeSizes.width) * 2 - 1;
-  pointer.y = -(clientY / threeSizes.height) * 2 + 1;
+  // The canvas is not always flush with the viewport: past the intro it stops
+  // being sticky and is positioned in the document, so its offset has to come
+  // off the pointer before normalizing to device coordinates (-1 to 1).
+  const rect = threeSizes.canvas?.getBoundingClientRect();
+  if (!rect || !rect.width || !rect.height) return;
+
+  pointer.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+  pointer.y = -((clientY - rect.top) / rect.height) * 2 + 1;
 };
 
 const performRaycast = () => {
