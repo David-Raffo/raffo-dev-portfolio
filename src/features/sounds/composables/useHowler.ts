@@ -61,12 +61,6 @@ export const useHowler = () => {
     Howler.mute(document.visibilityState === "hidden");
   };
 
-  const handleKeyPress = (event: KeyboardEvent) => {
-    if (event.code === "KeyM" && !isTouch.value) {
-      soundsEnabled.value = !soundsEnabled.value;
-    }
-  };
-
   watch(soundsEnabled, (newVal) => {
     if (!isFeatureEnabled("sounds") || isTouch.value) return;
     enabledVolume.value = newVal ? 1 : 0;
@@ -92,7 +86,6 @@ export const useHowler = () => {
 
     gsap.ticker.add(tick);
     window.addEventListener("visibilitychange", handleVisibilityChange);
-    window.addEventListener("keydown", handleKeyPress);
 
     if (!isTouch.value) {
       loadAllSounds();
@@ -103,7 +96,6 @@ export const useHowler = () => {
     if (!isFeatureEnabled("sounds")) return;
     gsap.ticker.remove(tick);
     window.removeEventListener("visibilitychange", handleVisibilityChange);
-    window.removeEventListener("keydown", handleKeyPress);
     stopSnoreRepetition();
   });
 };
