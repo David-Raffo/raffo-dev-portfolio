@@ -4,7 +4,7 @@
 
 [English](README.md) · **Español**
 
-**Portfolio personal de David Raffo — AI Automation Developer.**
+**Portfolio personal de David Raffo, AI Automation Developer.**
 Una web interactiva en 3D que muestra proyectos de automatización de procesos, agentes de IA y desarrollo full stack.
 
 [![Web](https://img.shields.io/badge/web-raffo.dev-000000?logo=googlechrome&logoColor=white)](https://raffo.dev)
@@ -44,7 +44,7 @@ Una web interactiva en 3D que muestra proyectos de automatización de procesos, 
 | [**Video Tools**](https://github.com/David-Raffo/videotools) | Editor de vídeo web autoalojado: edición sobre proxy, reloj de Web Audio, previsualización de LUT en WebGL2 y render a máxima calidad con FFmpeg. |
 | [**FreeRouter**](https://github.com/David-Raffo/FreeRouter) | Router compatible con OpenAI delante de 24 proveedores de inferencia gratuita, con control de cuotas y failover automático. |
 | **ContextChatbot** | Chatbot autoalojable en n8n para cualquier web, en versión landing y versión tienda con RAG. |
-| **Aplicaciones Web (IA)** | [Aprende Ajedrez](https://github.com/David-Raffo/aprende-ajedrez), [Pokémon Stat Master](https://github.com/David-Raffo/pokemon-stat-master), [Montón](https://github.com/David-Raffo/descubre-peliculas) y Quitafondos, un quitafondos por lotes. |
+| **Aplicaciones Web (IA)** | [Aprende Ajedrez](https://github.com/David-Raffo/aprende-ajedrez), [Pokémon Stat Master](https://github.com/David-Raffo/pokemon-stat-master), [Qué vemos hoy](https://github.com/David-Raffo/descubre-peliculas) y [Quitafondos](https://github.com/David-Raffo/Img-background-remover), un quitafondos por lotes. |
 | **Web Portfolio** | Webs realizadas para clientes de distintos sectores. |
 
 Cada caso de estudio combina capturas reales con diagramas animados que se adaptan al tema de cada proyecto (simulación de enrutado, timeline del editor, etalonaje interactivo, flujos del chatbot y de los agentes), hechos con SVG y GSAP.

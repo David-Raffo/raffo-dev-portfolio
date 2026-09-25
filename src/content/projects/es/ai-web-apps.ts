@@ -2,7 +2,8 @@ import imgChess from "../../../assets/images/projects/ai-web-apps/chess-game.web
 import imgPokemon from "../../../assets/images/projects/ai-web-apps/pokemon-game.webp";
 import imgPokemonMenu from "../../../assets/images/projects/ai-web-apps/pokemon-menu.webp";
 import imgPokemonResults from "../../../assets/images/projects/ai-web-apps/pokemon-results.webp";
-import imgMonton from "../../../assets/images/projects/ai-web-apps/monton.webp";
+import imgMovies from "../../../assets/images/projects/ai-web-apps/que-vemos-hoy-results.webp";
+import imgMoviesHome from "../../../assets/images/projects/ai-web-apps/que-vemos-hoy-home.webp";
 import imgRemoverLight from "../../../assets/images/projects/ai-web-apps/quitafondos-light.webp";
 import imgRemoverDark from "../../../assets/images/projects/ai-web-apps/quitafondos-dark.webp";
 
@@ -16,7 +17,7 @@ export default {
   sites: [
     { label: "Aprende Ajedrez", url: "https://chesswithraffo.lovable.app/" },
     { label: "Pokémon Stat Master", url: "https://v0-pokemon-stat-game.vercel.app/" },
-    { label: "Montón", url: "https://v0-que-vemos-hoy.vercel.app/" },
+    { label: "Qué vemos hoy", url: "https://v0-que-vemos-hoy.vercel.app/" },
   ],
   facts: [
     { label: "Apps", value: "4 · 3 publicadas" },
@@ -73,12 +74,12 @@ export default {
             source: "https://github.com/David-Raffo/pokemon-stat-master",
           },
           {
-            title: "Montón",
+            title: "Qué vemos hoy",
             kicker: "Buscador de películas",
             description:
               "Describe con tus palabras lo que te apetece ver. Un LLM juzga un catálogo de ~1.000 películas de TMDB y va enviando las que encajan mientras los pósters salen volando del montón.",
-            image: imgMonton,
-            alt: "Ilustración de la interfaz de Montón con una búsqueda y una fila de pósters",
+            image: imgMovies,
+            alt: "Qué vemos hoy mostrando películas de superhéroes con su nota y porcentaje de encaje",
             tags: ["next", "typescript", "tailwind", "openrouter"],
             live: "https://v0-que-vemos-hoy.vercel.app/",
             source: "https://github.com/David-Raffo/descubre-peliculas",
@@ -91,7 +92,7 @@ export default {
             image: imgRemoverLight,
             alt: "Quitafondos con tres imágenes procesadas y el comparador antes y después",
             tags: ["python", "flask", "onnx", "docker"],
-            note: "Repo privado · autoalojado",
+            source: "https://github.com/David-Raffo/Img-background-remover",
           },
         ],
       },
@@ -99,7 +100,7 @@ export default {
     {
       type: "heading",
       props: {
-        eyebrow: "Montón",
+        eyebrow: "Qué vemos hoy",
         title: "Describe un antojo. <em>Recibe una peli.</em>",
         text: "Sin filtros ni géneros: una sola caja de búsqueda. Cada película del catálogo se convierte en una pregunta de sí o no para el modelo, y las que pasan del 60% salen volando del montón.",
       },
@@ -109,6 +110,29 @@ export default {
       props: {
         name: "poster-pile",
         caption: "Simulación de la búsqueda: escribir, puntuar y los pósters saliendo del montón",
+      },
+    },
+    {
+      type: "media",
+      props: {
+        type: "image",
+        src: imgMoviesHome,
+        alt: "Pantalla inicial de Qué vemos hoy con el buscador y el montón de pósters",
+        caption: "El montón, antes de buscar",
+        ratio: "1918 / 998",
+        frame: "v0-que-vemos-hoy.vercel.app",
+      },
+    },
+    {
+      type: "media",
+      props: {
+        type: "image",
+        src: imgMovies,
+        alt: "Resultados de una búsqueda de superhéroes con nota y porcentaje de encaje en cada póster",
+        caption: "Las que encajan, fuera del montón",
+        captionAlign: "left",
+        ratio: "1918 / 998",
+        frame: "v0-que-vemos-hoy.vercel.app",
       },
     },
     {
