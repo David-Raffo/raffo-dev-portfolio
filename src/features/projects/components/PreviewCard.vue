@@ -18,6 +18,8 @@ const imageRef = ref<HTMLImageElement | null>(null);
 
 const props = defineProps<{
   preview?: ProjectPreview;
+  index?: number;
+  featured?: boolean;
 }>();
 
 onMounted(async () => {
@@ -47,7 +49,7 @@ onUnmounted(() => {
 
 <template>
   <Link
-    class="preview-card children-unclickable"
+    :class="['preview-card', 'children-unclickable', props.featured && 'preview-card-featured']"
     :to="`/project/${props.preview.slug}`"
     :aria-label="t('switch-to-project', { project: props.preview.title })"
     data-cursor="arrow"
@@ -66,7 +68,9 @@ onUnmounted(() => {
             class="preview-card-image"
             ref="imageRef"
           />
+          <span class="preview-card-shine"></span>
         </div>
+        <span v-if="props.preview.category" class="preview-card-category">{{ props.preview.category }}</span>
       </div>
       <div class="preview-card-overlay">
         <div class="preview-card-edge">
@@ -80,8 +84,17 @@ onUnmounted(() => {
     </div>
     <div class="preview-card-content">
       <div class="preview-card-copys">
-        <h3 class="preview-card-title">{{ props.preview.title }}</h3>
+        <h3 class="preview-card-title">
+          <span v-if="props.index !== undefined" class="preview-card-index">{{
+            String(props.index + 1).padStart(2, "0")
+          }}</span>
+          {{ props.preview.title }}
+        </h3>
         <p class="preview-card-description">{{ props.preview.description }}</p>
+        <span v-if="props.featured" class="preview-card-cta">
+          {{ t("view-project") }}
+          <ArrowRightLong class="preview-card-cta-arrow" />
+        </span>
       </div>
     </div>
   </Link>
@@ -144,6 +157,57 @@ onUnmounted(() => {
     padding-top: var(--space-xs);
   }
 
+  &-cta {
+    display: none;
+  }
+
+  &-featured {
+    @include mixins.mq("md") {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+      align-items: center;
+      gap: var(--space-xl);
+
+      .preview-card-content {
+        padding-top: 0;
+        padding-right: var(--space-md);
+      }
+
+      .preview-card-copys {
+        gap: var(--space-sm);
+      }
+
+      .preview-card-title {
+        font-size: var(--font-size-title-sm);
+        line-height: var(--line-height-title);
+      }
+
+      .preview-card-description {
+        font-size: var(--font-size-lg);
+      }
+
+      .preview-card-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-xs);
+        margin-top: var(--space-sm);
+        font-size: var(--font-size-sm);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-text-400);
+        --icon-color: var(--color-text-400);
+
+        &-arrow {
+          width: 22px;
+          transition: transform 0.2s var(--ease-smooth);
+          transform: translateX(calc(var(--hover) * 6px));
+        }
+      }
+    }
+  }
+
   &-overlay {
     @include mixins.hover {
       display: none;
@@ -194,16 +258,59 @@ onUnmounted(() => {
     object-fit: cover;
 
     &-container {
-      transition: transform 0.1s ease-in-out;
-      transform: scale(calc(1 + var(--hover) * 0.02));
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s var(--ease-smooth);
+      transform: scale(calc(1 + var(--hover) * 0.03));
       aspect-ratio: 16/9;
     }
 
     &-wrapper {
+      position: relative;
       border-radius: var(--radius-lg);
       overflow: hidden;
       background-color: var(--color-beige-500);
     }
+  }
+
+  &-shine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.35) 50%, transparent 65%);
+    transform: translateX(-100%);
+    pointer-events: none;
+  }
+
+  @include mixins.hover {
+    &:hover &-shine {
+      transform: translateX(100%);
+      transition: transform 0.9s var(--ease-smooth);
+    }
+  }
+
+  &-category {
+    position: absolute;
+    top: var(--space-sm);
+    left: var(--space-sm);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: white;
+    background-color: rgba(20, 16, 12, 0.62);
+    backdrop-filter: blur(8px);
+    pointer-events: none;
+  }
+
+  &-index {
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 0.7em;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    vertical-align: 0.2em;
+    color: var(--color-text-300);
   }
 
   &-top {
