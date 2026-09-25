@@ -33,7 +33,14 @@ export type TagVariant =
   | "aseprite"
   | "gimp"
   | "pixelart"
-  | "gdscript";
+  | "gdscript"
+  | "fastapi"
+  | "ffmpeg"
+  | "webgl"
+  | "flask"
+  | "onnx"
+  | "tailwind"
+  | "supabase";
 
 export const tagLabels = {
   three: "Three.js",
@@ -71,4 +78,11 @@ export const tagLabels = {
   gimp: "GIMP",
   pixelart: "Pixel Art",
   gdscript: "GDScript",
+  fastapi: "FastAPI",
+  ffmpeg: "FFmpeg",
+  webgl: "WebGL2",
+  flask: "Flask",
+  onnx: "ONNX Runtime",
+  tailwind: "Tailwind CSS",
+  supabase: "Supabase",
 } as const satisfies Record<TagVariant, string>;

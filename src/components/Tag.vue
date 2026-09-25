@@ -18,7 +18,7 @@ const classes = computed(() => ["tag", `tag-variant-${props.variant}`]);
 <style scoped lang="scss">
 .tag {
   border-radius: var(--radius-md);
-  padding: calc(var(--space-xxs) - var(--stroke-md)) calc(var(--space-sm  ) - var(--stroke-md));
+  padding: calc(var(--space-xxs) - var(--stroke-md)) calc(var(--space-sm) - var(--stroke-md));
   border: var(--stroke-md) solid transparent;
 
   &-copy {
@@ -178,8 +178,8 @@ const classes = computed(() => ["tag", `tag-variant-${props.variant}`]);
     }
 
     &-pixelart {
-      background-color: #FFE082;
-      color: #35016D;
+      background-color: #ffe082;
+      color: #35016d;
     }
 
     &-aseprite {
@@ -195,6 +195,41 @@ const classes = computed(() => ["tag", `tag-variant-${props.variant}`]);
     &-gdscript {
       background-color: #478cbf;
       color: white;
+    }
+
+    &-fastapi {
+      background-color: #009688;
+      color: white;
+    }
+
+    &-ffmpeg {
+      background-color: #007808;
+      color: white;
+    }
+
+    &-webgl {
+      background-color: #990000;
+      color: white;
+    }
+
+    &-flask {
+      background-color: #e8e8e8;
+      color: #111111;
+    }
+
+    &-onnx {
+      background-color: #5a5a5a;
+      color: white;
+    }
+
+    &-tailwind {
+      background-color: #06b6d4;
+      color: #06262c;
+    }
+
+    &-supabase {
+      background-color: #3ecf8e;
+      color: #0c2a1c;
     }
   }
 }

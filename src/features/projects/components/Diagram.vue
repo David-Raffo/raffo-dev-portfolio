@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { defineAsyncComponent } from "vue";
 
-export type DiagramName = "freerouter-flow";
+export type DiagramName = "freerouter-flow" | "video-timeline" | "color-grade";
 
 export interface Props {
   name: DiagramName;
@@ -12,6 +12,8 @@ const props = defineProps<Props>();
 
 const diagrams = {
   "freerouter-flow": defineAsyncComponent(() => import("./diagrams/FreeRouterFlow.vue")),
+  "video-timeline": defineAsyncComponent(() => import("./diagrams/VideoTimeline.vue")),
+  "color-grade": defineAsyncComponent(() => import("./diagrams/ColorGrade.vue")),
 } as const satisfies Record<DiagramName, unknown>;
 </script>
 
