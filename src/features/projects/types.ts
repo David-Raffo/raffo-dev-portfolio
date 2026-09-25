@@ -6,6 +6,7 @@ import type { Props as HeadingProps } from "./components/Heading.vue";
 import type { Props as StatsProps } from "./components/Stats.vue";
 import type { Props as FeaturesProps } from "./components/Features.vue";
 import type { Props as DiagramProps } from "./components/Diagram.vue";
+import type { Props as AppsProps } from "./components/Apps.vue";
 
 export interface ProjectComponents {
   imageText: ImageTextProps;
@@ -16,6 +17,7 @@ export interface ProjectComponents {
   stats: StatsProps;
   features: FeaturesProps;
   diagram: DiagramProps;
+  apps: AppsProps;
 }
 
 export type ProjectComponent = {
