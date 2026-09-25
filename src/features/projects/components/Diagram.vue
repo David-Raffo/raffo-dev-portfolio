@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import { defineAsyncComponent } from "vue";
 
-export type DiagramName =
-  | "freerouter-flow"
-  | "video-timeline"
-  | "color-grade"
-  | "chat-demo"
-  | "agents-hub"
-  | "poster-pile";
+export type DiagramName = "freerouter-flow";
 
 export interface Props {
   name: DiagramName;
@@ -18,11 +12,6 @@ const props = defineProps<Props>();
 
 const diagrams = {
   "freerouter-flow": defineAsyncComponent(() => import("./diagrams/FreeRouterFlow.vue")),
-  "video-timeline": defineAsyncComponent(() => import("./diagrams/VideoTimeline.vue")),
-  "color-grade": defineAsyncComponent(() => import("./diagrams/ColorGrade.vue")),
-  "chat-demo": defineAsyncComponent(() => import("./diagrams/ChatDemo.vue")),
-  "agents-hub": defineAsyncComponent(() => import("./diagrams/AgentsHub.vue")),
-  "poster-pile": defineAsyncComponent(() => import("./diagrams/PosterPile.vue")),
 } as const satisfies Record<DiagramName, unknown>;
 </script>
 

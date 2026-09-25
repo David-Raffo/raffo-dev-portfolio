@@ -5,6 +5,7 @@ import type { Props as MediaProps } from "./components/Media.vue";
 import type { Props as HeadingProps } from "./components/Heading.vue";
 import type { Props as StatsProps } from "./components/Stats.vue";
 import type { Props as FeaturesProps } from "./components/Features.vue";
+import type { Props as DiagramProps } from "./components/Diagram.vue";
 
 export interface ProjectComponents {
   imageText: ImageTextProps;
@@ -14,6 +15,7 @@ export interface ProjectComponents {
   heading: HeadingProps;
   stats: StatsProps;
   features: FeaturesProps;
+  diagram: DiagramProps;
 }
 
 export type ProjectComponent = {
