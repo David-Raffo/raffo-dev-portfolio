@@ -31,7 +31,6 @@ const handleClick = () => {
 const init = () => {
   box3 = new Box3();
   box3.onClick = handleClick;
-  box3.hoverSound = "keyboard";
   raycast.boxesToCheck.push(box3);
   gsap.ticker.add(tick);
 };
