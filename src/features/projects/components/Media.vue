@@ -15,6 +15,8 @@ export interface Props {
   alt?: string;
   caption?: string;
   captionAlign?: "left" | "right";
+  ratio?: string;
+  frame?: string;
   index: number;
 }
 
@@ -23,8 +25,11 @@ const props = defineProps<Props>();
 const wrapperClasses = computed(() => {
   return {
     "project-media": true,
+    "project-media-framed": !!props.frame,
   };
 });
+
+const boxStyle = computed(() => ({ aspectRatio: props.ratio ?? "16 / 9" }));
 
 watchEffect(async (onInvalidate) => {
   if (!wrapperRef.value) {
@@ -91,40 +96,59 @@ onMounted(async () => {
 
 <template>
   <div :class="wrapperClasses" ref="wrapperRef">
-    <div class="project-media-content" ref="mediaContentRef" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave" @mousemove="handleMouseMove">
-      <img
-        v-if="props.type === 'image'"
-        :src="props.src"
-        :alt="props.alt"
-        loading="lazy"
-        fetchpriority="high"
-        class="project-media-image"
-        ref="mediaRef"
-      />
-      <video
-        v-else-if="props.type === 'video'"
-        :src="props.src"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-        class="project-media-video"
-        ref="mediaRef"
+    <div class="project-media-content" ref="mediaContentRef">
+      <div v-if="props.frame" class="project-media-frame">
+        <span class="project-media-frame-dots"><i></i><i></i><i></i></span>
+        <span class="project-media-frame-url">{{ props.frame }}</span>
+      </div>
+      <div
+        class="project-media-box"
+        :style="boxStyle"
+        @mouseenter="handleMouseEnter"
+        @mouseleave="handleMouseLeave"
+        @mousemove="handleMouseMove"
       >
-        <source :src="props.src" type="video/mp4" />
-      </video>
-      <iframe
-        v-else-if="props.type === 'youtube'"
-        :src="`https://www.youtube.com/embed/${props.src}?rel=0`"
-        class="project-media-youtube"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-        frameborder="0"
-      />
-      <div v-if="magnifierVisible && props.type === 'image'" class="project-media-magnifier" :style="magnifierStyle"></div>
+        <img
+          v-if="props.type === 'image'"
+          :src="props.src"
+          :alt="props.alt"
+          loading="lazy"
+          fetchpriority="high"
+          class="project-media-image"
+          ref="mediaRef"
+        />
+        <video
+          v-else-if="props.type === 'video'"
+          :src="props.src"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          class="project-media-video"
+          ref="mediaRef"
+        >
+          <source :src="props.src" type="video/mp4" />
+        </video>
+        <iframe
+          v-else-if="props.type === 'youtube'"
+          :src="`https://www.youtube.com/embed/${props.src}?rel=0`"
+          class="project-media-youtube"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          frameborder="0"
+        />
+        <div
+          v-if="magnifierVisible && props.type === 'image'"
+          class="project-media-magnifier"
+          :style="magnifierStyle"
+        ></div>
+      </div>
     </div>
-    <div :class="['project-media-caption', props.captionAlign === 'left' && 'project-media-caption-left']" v-if="props.caption">
+    <div
+      :class="['project-media-caption', props.captionAlign === 'left' && 'project-media-caption-left']"
+      v-if="props.caption"
+    >
       <Notch class="project-media-caption-notch project-media-caption-notch-left" />
       <Notch class="project-media-caption-notch project-media-caption-notch-top" />
       <p class="project-media-caption-copy">{{ props.caption }}</p>
@@ -140,7 +164,6 @@ onMounted(async () => {
   max-width: 900px;
   justify-self: center;
   position: relative;
-  aspect-ratio: 16 / 9;
 
   @include mixins.mq("md") {
     grid-column: 2 / 12;
@@ -227,6 +250,7 @@ onMounted(async () => {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top center;
   }
 
   &-video {
@@ -246,9 +270,74 @@ onMounted(async () => {
     border-radius: var(--radius-lg);
     background-color: var(--color-background-300);
     width: 100%;
-    height: 100%;
     position: relative;
+  }
+
+  &-box {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
     cursor: none;
+  }
+
+  &-framed &-content {
+    border: var(--stroke-sm) solid var(--color-grayscale-500);
+    box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.45);
+  }
+
+  &-frame {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    height: 30px;
+    padding: 0 var(--space-sm);
+    background-color: var(--color-background-300);
+    border-bottom: var(--stroke-sm) solid var(--color-grayscale-400);
+
+    @include mixins.mq("md") {
+      height: 36px;
+    }
+
+    &-dots {
+      display: flex;
+      gap: 6px;
+
+      i {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background-color: var(--color-grayscale-500);
+
+        &:first-child {
+          background-color: #ff5f57;
+        }
+
+        &:nth-child(2) {
+          background-color: #febc2e;
+        }
+
+        &:nth-child(3) {
+          background-color: #28c840;
+        }
+      }
+    }
+
+    &-url {
+      flex: 1;
+      max-width: 340px;
+      margin: 0 auto;
+      transform: translateX(-24px);
+      padding: 2px var(--space-sm);
+      border-radius: 999px;
+      text-align: center;
+      font-size: var(--font-size-xxs);
+      font-weight: 600;
+      color: var(--color-text-300);
+      background-color: var(--color-grayscale-400);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   &-magnifier {
