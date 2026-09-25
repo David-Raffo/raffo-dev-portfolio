@@ -40,11 +40,14 @@ An interactive 3D website that showcases projects in process automation, AI agen
 
 | Project | Description |
 |---|---|
-| [**FreeRouter**](https://github.com/David-Raffo/FreeRouter) | OpenAI-compatible router in front of 24 free inference providers, with quota tracking and automatic failover. |
 | **AI Shop Helper** | SaaS that automates eCommerce and digital marketing with AI agents (n8n, LangGraph, Make). |
+| [**Video Tools**](https://github.com/David-Raffo/videotools) | Self-hosted browser video editor: proxy editing, Web Audio clock, WebGL2 LUT preview and full-quality FFmpeg renders. |
+| [**FreeRouter**](https://github.com/David-Raffo/FreeRouter) | OpenAI-compatible router in front of 24 free inference providers, with quota tracking and automatic failover. |
 | **ContextChatbot** | Self-hostable n8n chatbot for any website, in landing and RAG-powered shop versions. |
-| **AI Web Apps** | Small AI-assisted apps such as [Chess with Raffo](https://chesswithraffo.lovable.app/) and [Pokémon Stat Master](https://v0-pokemon-stat-game.vercel.app/). |
+| **AI Web Apps** | [Aprende Ajedrez](https://github.com/David-Raffo/aprende-ajedrez), [Pokémon Stat Master](https://github.com/David-Raffo/pokemon-stat-master), [Montón](https://github.com/David-Raffo/descubre-peliculas) and Quitafondos, a batch background remover. |
 | **Web Portfolio** | Websites delivered for clients across different industries. |
+
+Each case study mixes real screenshots with animated, theme-aware diagrams (routing simulation, editor timeline, interactive color grading, chatbot and agent flows) built with SVG and GSAP.
 
 ## Tech stack
 
@@ -111,6 +114,7 @@ scripts/             # Model compression
 2. Register the slug in `projectIds` in `src/content/projects/index.ts`.
 3. Add its preview in `src/content/projects/previews/`.
 4. Tags and their variants live in `src/components/tagVariants.ts`.
+5. Build the page from the blocks in `src/features/projects/types.ts`: `media`, `heading`, `stats`, `features`, `apps`, `marquee` and `diagram` (animated diagrams live in `src/features/projects/components/diagrams/`).
 
 ## Contact
 

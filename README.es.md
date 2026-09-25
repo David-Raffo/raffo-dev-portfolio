@@ -40,11 +40,14 @@ Una web interactiva en 3D que muestra proyectos de automatización de procesos, 
 
 | Proyecto | Descripción |
 |---|---|
-| [**FreeRouter**](https://github.com/David-Raffo/FreeRouter) | Router compatible con OpenAI delante de 24 proveedores de inferencia gratuita, con control de cuotas y failover automático. |
 | **AI Shop Helper** | SaaS que automatiza el eCommerce y el marketing digital con agentes de IA (n8n, LangGraph, Make). |
+| [**Video Tools**](https://github.com/David-Raffo/videotools) | Editor de vídeo web autoalojado: edición sobre proxy, reloj de Web Audio, previsualización de LUT en WebGL2 y render a máxima calidad con FFmpeg. |
+| [**FreeRouter**](https://github.com/David-Raffo/FreeRouter) | Router compatible con OpenAI delante de 24 proveedores de inferencia gratuita, con control de cuotas y failover automático. |
 | **ContextChatbot** | Chatbot autoalojable en n8n para cualquier web, en versión landing y versión tienda con RAG. |
-| **AI Web Apps** | Pequeñas apps creadas con ayuda de IA, como [Chess with Raffo](https://chesswithraffo.lovable.app/) y [Pokémon Stat Master](https://v0-pokemon-stat-game.vercel.app/). |
+| **Aplicaciones Web (IA)** | [Aprende Ajedrez](https://github.com/David-Raffo/aprende-ajedrez), [Pokémon Stat Master](https://github.com/David-Raffo/pokemon-stat-master), [Montón](https://github.com/David-Raffo/descubre-peliculas) y Quitafondos, un quitafondos por lotes. |
 | **Web Portfolio** | Webs realizadas para clientes de distintos sectores. |
+
+Cada caso de estudio combina capturas reales con diagramas animados que se adaptan al tema de cada proyecto (simulación de enrutado, timeline del editor, etalonaje interactivo, flujos del chatbot y de los agentes), hechos con SVG y GSAP.
 
 ## Tecnologías
 
@@ -111,6 +114,7 @@ scripts/             # Compresión de modelos
 2. Registra el slug en `projectIds` dentro de `src/content/projects/index.ts`.
 3. Añade su vista previa en `src/content/projects/previews/`.
 4. Las etiquetas y sus variantes están en `src/components/tagVariants.ts`.
+5. Monta la página con los bloques de `src/features/projects/types.ts`: `media`, `heading`, `stats`, `features`, `apps`, `marquee` y `diagram` (los diagramas animados están en `src/features/projects/components/diagrams/`).
 
 ## Contacto
 
