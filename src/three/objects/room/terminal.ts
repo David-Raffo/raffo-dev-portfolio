@@ -3,7 +3,6 @@ import gsap from "gsap";
 import { room } from ".";
 import { raycast } from "../../utils/raycast";
 import { sceneWeights } from "../../../animations/scenes";
-import { playSound } from "../../../features/sounds/utils/sounds";
 import { openTerminal, terminalOpen } from "../../../composables/useTerminal";
 
 import type { ClickableBox3 } from "../../types";
@@ -24,7 +23,6 @@ const isReachable = () => sceneWeights.hero > 0.001 && !terminalOpen.value;
 
 const handleClick = () => {
   if (!isReachable()) return;
-  playSound("keyboard");
   openTerminal();
 };
 
