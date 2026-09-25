@@ -3,6 +3,9 @@ import ImageText from "./ImageText.vue";
 import Text from "./Text.vue";
 import List from "./List.vue";
 import Media from "./Media.vue";
+import Heading from "./Heading.vue";
+import Stats from "./Stats.vue";
+import Features from "./Features.vue";
 
 import type { ProjectComponents, ProjectComponentProps } from "../types";
 
@@ -17,6 +20,9 @@ const components = {
   text: Text,
   list: List,
   media: Media,
+  heading: Heading,
+  stats: Stats,
+  features: Features,
 } as const satisfies Record<keyof ProjectComponents, any>;
 
 const Component = components[type];
