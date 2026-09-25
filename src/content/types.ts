@@ -15,6 +15,7 @@ export interface ProjectContent {
   source?: string;
   steam?: string;
   sites?: { label: string; url: string }[];
+  facts?: { label: string; value: string }[];
   components?: ProjectComponent[];
 }
 
@@ -28,4 +29,5 @@ export interface ProjectPreview {
   slug: string;
   thumbnail: string;
   description: string;
+  category?: string;
 }

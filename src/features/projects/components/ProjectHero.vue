@@ -32,6 +32,17 @@ watch(projectId, () => {
       <div class="project-hero-tags">
         <Tag v-for="tag in content.tags" :key="tag" :variant="tag" />
       </div>
+      <dl v-if="content.facts?.length" class="project-hero-facts" :key="`facts-${animationKey}`">
+        <div
+          v-for="(fact, index) in content.facts"
+          :key="fact.label"
+          class="project-hero-fact"
+          :style="{ '--fact-index': index }"
+        >
+          <dt class="project-hero-fact-label">{{ fact.label }}</dt>
+          <dd class="project-hero-fact-value">{{ fact.value }}</dd>
+        </div>
+      </dl>
     </div>
     <div class="project-hero-description" v-html="content.description"></div>
     <div class="project-hero-buttons">
@@ -65,7 +76,8 @@ watch(projectId, () => {
             rel="noopener noreferrer"
             class="project-hero-sites-item"
             data-hoversound="hover"
-          >{{ site.label }}</a>
+            >{{ site.label }}</a
+          >
         </div>
       </div>
       <Link
@@ -75,9 +87,7 @@ watch(projectId, () => {
         class="project-hero-button"
         data-cursor="arrow-external"
       >
-        <Button renderAs="div" variant="border" class="children-unclickable" data-hoversound="hover">
-          Steam
-        </Button>
+        <Button renderAs="div" variant="border" class="children-unclickable" data-hoversound="hover"> Steam </Button>
       </Link>
     </div>
   </div>
@@ -100,7 +110,9 @@ watch(projectId, () => {
     &-arrow {
       display: inline-block;
       transition: transform 0.2s;
-      &-open { transform: rotate(180deg); }
+      &-open {
+        transform: rotate(180deg);
+      }
     }
 
     &-dropdown {
@@ -113,7 +125,7 @@ watch(projectId, () => {
       overflow: hidden;
       z-index: 10;
       min-width: 220px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
     }
 
     &-item {
@@ -239,6 +251,51 @@ watch(projectId, () => {
     @include mixins.mq("xl") {
       grid-row: 1;
       grid-column: 7 / 11;
+    }
+  }
+
+  &-facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-xs);
+    margin-top: var(--space-md);
+    max-width: 440px;
+  }
+
+  &-fact {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    border: var(--stroke-sm) solid var(--color-grayscale-400);
+    animation: project-hero-fact-in 0.6s var(--ease-smooth) both;
+    animation-delay: calc(0.15s + var(--fact-index) * 0.07s);
+
+    &-label {
+      font-size: var(--font-size-xxs);
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-accent-400);
+    }
+
+    &-value {
+      font-size: var(--font-size-sm);
+      font-weight: 700;
+      color: var(--color-text-400);
+      line-height: var(--line-height-copy);
+
+      @include mixins.mq("md") {
+        font-size: var(--font-size-md);
+      }
+    }
+
+    @keyframes project-hero-fact-in {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
     }
   }
 
