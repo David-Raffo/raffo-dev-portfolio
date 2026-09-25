@@ -13,9 +13,59 @@ export default {
     { label: "AI Shop Helper (landing)", url: "https://aishophelper.ai/" },
     { label: "Instituto Europroject (shop)", url: "https://institutoeuroproject.com/es/" },
   ],
+  facts: [
+    { label: "Built with", value: "n8n · OpenRouter" },
+    { label: "Versions", value: "Landing · Shop with RAG" },
+    { label: "Type", value: "Self-hosted · Embeddable" },
+    { label: "Live on", value: "3 websites" },
+  ],
   description:
     "<p class='description-hook'>Two chatbots, any website.</p><p>ContextChatbot is a self-hostable AI chatbot built in n8n that generates an embeddable URL. Drop it into any iframe or frontend and you instantly have an assistant trained on that site's knowledge. It uses OpenRouter to guarantee fast inference with automatic fallbacks across multiple providers and models, and is scoped strictly to its domain so it never goes off-topic. It comes in two versions depending on what the site needs.</p><p>The landing version targets corporate sites and businesses with a focused catalogue of services. It is trained through a custom prompt and takes care of answering questions, qualifying leads and guiding visitors towards contact.</p><p>The shop version is a RAG wired to a database holding every product in the store. On top of answering, it recommends products based on what the customer is looking for, shows them in a carousel inside the chat itself and adds them to the cart without making them leave the conversation.</p>",
   components: [
+    {
+      type: "diagram",
+      props: {
+        name: "chat-demo",
+        caption: "Simulation: the landing version qualifies a lead, the shop version sells",
+      },
+    },
+    {
+      type: "features",
+      props: {
+        items: [
+          {
+            icon: "globe",
+            title: "One embeddable URL",
+            text: "n8n generates a URL that works in any iframe or frontend, so the same bot fits any site.",
+          },
+          {
+            icon: "message",
+            title: "Landing version",
+            text: "Trained with a custom prompt to answer questions, qualify leads and guide visitors to contact.",
+          },
+          {
+            icon: "database",
+            title: "Shop version with RAG",
+            text: "Searches the whole product database, shows matches in a carousel and adds them to the cart.",
+          },
+          {
+            icon: "route",
+            title: "Automatic fallbacks",
+            text: "OpenRouter keeps inference fast by switching models and providers when one of them fails.",
+          },
+          {
+            icon: "shield",
+            title: "Strictly on topic",
+            text: "Scoped to the site's domain, so it never drifts into conversations that are not the business's.",
+          },
+          {
+            icon: "box",
+            title: "Self-hostable",
+            text: "Runs on your own n8n instance, with the data and the prompts under your control.",
+          },
+        ],
+      },
+    },
     {
       type: "media",
       props: {
