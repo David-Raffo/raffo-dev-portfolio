@@ -28,18 +28,71 @@ export default {
     { label: "Grupo Ciudad Jardín", url: "https://www.grupociudadjardin.com/" },
     { label: "Fontaclic", url: "https://fontaclic.es/es/" },
   ],
+  facts: [
+    { label: "Type", value: "Client work" },
+    { label: "Platforms", value: "WordPress · PrestaShop · Shopify" },
+    { label: "Focus", value: "Performance & technical SEO" },
+    { label: "Scope", value: "Layout, upkeep & PHP plugins" },
+  ],
   description:
     "<p class='description-hook'>10 projects. Countless industries. One developer.</p><p>This is a selection of websites I have worked on: architecture, hospitality, food, coworking, sports, industrial, and more, including multilingual projects.</p><p>From corporate sites to eCommerce stores, I've worked across WordPress, PrestaShop and Shopify handling layout, maintenance and custom PHP plugins tailored to each client's needs. On several of them I also applied technical SEO: faster load times, image optimization, Core Web Vitals improvements and AI tools to boost organic visibility.</p>",
   components: [
-    { type: "media", props: { type: "image", src: imgSlazenger, alt: "Slazengerheritage", caption: "Slazengerheritage" } },
+    {
+      type: "stats",
+      props: {
+        items: [
+          { value: 10, label: "websites delivered" },
+          { value: 3, label: "CMS platforms" },
+          { value: 6, suffix: "+", label: "industries" },
+        ],
+      },
+    },
+    {
+      type: "marquee",
+      props: {
+        items: [
+          { src: imgSlazenger, label: "Slazengerheritage" },
+          { src: imgNersa, label: "Nersa SL" },
+          { src: imgIturri, label: "Iturri" },
+          { src: imgFrame, label: "Frame Architects" },
+          { src: imgCoworking, label: "Sevilla Coworking" },
+          { src: imgMultiplicalia, label: "Multiplicalia" },
+          { src: imgZarzuela, label: "Restaurante La Zarzuela" },
+          { src: imgBonanza, label: "Bonanza Food" },
+          { src: imgCiudadJardin, label: "Grupo Ciudad Jardín" },
+          { src: imgFontaclic, label: "Fontaclic" },
+        ],
+      },
+    },
+    {
+      type: "heading",
+      props: {
+        eyebrow: "Selected work",
+        title: "Every site, <em>one by one.</em>",
+        text: "Hover over a screenshot to zoom in and see the details.",
+      },
+    },
+    {
+      type: "media",
+      props: { type: "image", src: imgSlazenger, alt: "Slazengerheritage", caption: "Slazengerheritage" },
+    },
     { type: "media", props: { type: "image", src: imgNersa, alt: "Nersa SL", caption: "Nersa SL" } },
     { type: "media", props: { type: "image", src: imgIturri, alt: "Iturri", caption: "Iturri" } },
     { type: "media", props: { type: "image", src: imgFrame, alt: "Frame Architects", caption: "Frame Architects" } },
-    { type: "media", props: { type: "image", src: imgCoworking, alt: "Sevilla Coworking", caption: "Sevilla Coworking" } },
+    {
+      type: "media",
+      props: { type: "image", src: imgCoworking, alt: "Sevilla Coworking", caption: "Sevilla Coworking" },
+    },
     { type: "media", props: { type: "image", src: imgMultiplicalia, alt: "Multiplicalia", caption: "Multiplicalia" } },
-    { type: "media", props: { type: "image", src: imgZarzuela, alt: "Restaurante La Zarzuela", caption: "Restaurante La Zarzuela" } },
+    {
+      type: "media",
+      props: { type: "image", src: imgZarzuela, alt: "Restaurante La Zarzuela", caption: "Restaurante La Zarzuela" },
+    },
     { type: "media", props: { type: "image", src: imgBonanza, alt: "Bonanza Food", caption: "Bonanza Food" } },
-    { type: "media", props: { type: "image", src: imgCiudadJardin, alt: "Grupo Ciudad Jardín", caption: "Grupo Ciudad Jardín" } },
+    {
+      type: "media",
+      props: { type: "image", src: imgCiudadJardin, alt: "Grupo Ciudad Jardín", caption: "Grupo Ciudad Jardín" },
+    },
     { type: "media", props: { type: "image", src: imgFontaclic, alt: "Fontaclic", caption: "Fontaclic" } },
   ],
 } as const satisfies ProjectContent;

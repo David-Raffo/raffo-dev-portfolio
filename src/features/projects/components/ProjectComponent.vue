@@ -8,6 +8,7 @@ import Stats from "./Stats.vue";
 import Features from "./Features.vue";
 import Diagram from "./Diagram.vue";
 import Apps from "./Apps.vue";
+import Marquee from "./Marquee.vue";
 
 import type { ProjectComponents, ProjectComponentProps } from "../types";
 
@@ -27,6 +28,7 @@ const components = {
   features: Features,
   diagram: Diagram,
   apps: Apps,
+  marquee: Marquee,
 } as const satisfies Record<keyof ProjectComponents, any>;
 
 const Component = components[type];
